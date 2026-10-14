@@ -4,7 +4,7 @@
 
 **Pokémon Platinum with BW2's battle engine.**<br>
 
-[**Download**](../../releases/latest) · [Setup](#setup) · [Options](#in-game-options) · [Troubleshooting](#troubleshooting) · [Report a problem](../../issues)
+[**Build in your browser**](https://smoldice.github.io/platinum-reforged-anvil/build/) · [**Download**](../../releases/latest) · [Setup](#setup) · [Options](#in-game-options) · [Troubleshooting](#troubleshooting) · [Report a problem](../../issues)
 
 </div>
 
@@ -17,9 +17,9 @@ more of Gen V along with it. I have plenty more ideas on the way, but the goal w
 everyone forge their own Gen IV experience (yes, I did the thing), so Platinum Reforged will always have
 a configuration-first approach when implementing new features.
 
-This repository hosts the downloads for **Platinum Reforged Anvil**, the tool that builds the game.
+This is the home of **Platinum Reforged Anvil**, the tool that builds the game.
 Anvil takes your own Platinum and Black 2 or White 2 and writes a new ROM,
-*Pokemon Platinum Reforged.nds*.
+*Pokemon Platinum Reforged.nds*. It runs [in your browser](https://smoldice.github.io/platinum-reforged-anvil/build/) or as a program for Windows and Linux.
 
 ## What's new
 
@@ -70,7 +70,7 @@ or as little of Gen V as you like.
 1. **Pokémon Platinum (USA)**, Rev 0 or Rev 1, as an `.nds` file (game code `CPUE`).
 2. **Pokémon Black Version 2** or **Pokémon White Version 2** (USA, Europe), as an `.nds` file (game codes `IREO` and
    `IRDO`). "NDSi Enhanced" dumps are fine.
-3. **Windows 10 or 11**, or **Linux**.
+3. A recent web browser, or **Windows 10 or 11**, or **Linux**.
 
 Both ROMs must be clean, unmodified dumps of your own cartridges. Trimmed dumps work.
 
@@ -78,6 +78,16 @@ Both ROMs must be clean, unmodified dumps of your own cartridges. Trimmed dumps 
 > Black 2 or White 2.
 
 ## Setup
+
+### In your browser
+
+1. Open [Anvil in your browser](https://smoldice.github.io/platinum-reforged-anvil/build/).
+2. Choose your Platinum ROM and your Black 2 or White 2 ROM: click **Choose...**, or drop both files onto the
+   page.
+3. Click **Build Platinum Reforged**, then **Save the ROM**.
+
+Your ROMs never leave your computer: the page builds the game there. The first time, your browser downloads
+about 15 MB to run Anvil, and a build takes about a minute.
 
 ### Windows
 
@@ -152,8 +162,9 @@ Platinum Reforged is built on the work of the Pokémon decompilation community:
 - [pokebw2](https://github.com/fuddlesworth/pokebw2), the Pokémon Black 2 and White 2 decompilation.
 
 Anvil is made with [Python](https://www.python.org/), [pywebview](https://pywebview.flowrl.com/),
-[bsdiff4](https://github.com/ilanschnell/bsdiff4), [Pillow](https://python-pillow.org/) and
-[PyInstaller](https://pyinstaller.org/). Their licences are in *NOTICES.txt*, which comes with each download.
+[Pillow](https://python-pillow.org/) and [PyInstaller](https://pyinstaller.org/), and runs in the browser with
+[Pyodide](https://pyodide.org/). Their licences are in *NOTICES.txt*, which comes with each download, and on the
+site's [notices](https://smoldice.github.io/platinum-reforged-anvil/notices/) page.
 
 ## Disclaimer
 
