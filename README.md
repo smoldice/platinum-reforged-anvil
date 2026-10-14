@@ -5,6 +5,7 @@
 **Pokémon Platinum with BW2's battle engine.**<br>
 
 [![Play now in the web builder](https://img.shields.io/badge/Play_now-Web_builder-B00F16?style=for-the-badge&logo=webassembly&logoColor=white)](https://smoldice.github.io/platinum-reforged-anvil/build/)
+[![Buy me a coffee on Ko-fi](https://img.shields.io/badge/Ko--fi-Buy_me_a_coffee-FF5E5B?style=for-the-badge&logo=kofi&logoColor=white)](https://ko-fi.com/smoldice)
 
 [**Download**](../../releases/latest) · [Setup](#setup) · [Options](#in-game-options) · [Troubleshooting](#troubleshooting) · [Report a problem](../../issues)
 
