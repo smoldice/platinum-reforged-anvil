@@ -18,7 +18,7 @@ more of Gen V along with it. I have plenty more ideas on the way, but the goal w
 everyone forge their own Gen IV experience (yes, I did the thing). That's why Platinum Reforged will always have
 a configuration-first approach when implementing new features.
 
-This repository hosts the downloads for **Platinum Reforged Anvil**, the tool that builds southe game.
+This repository hosts the downloads for **Platinum Reforged Anvil**, the tool that builds the game.
 Anvil takes your own Platinum and Black 2 or White 2 and writes a new ROM,
 *Pokemon Platinum Reforged.nds*.
 
@@ -44,9 +44,9 @@ depending on where you are standing: lawn, dirt path, tall grass, mountain, cave
 **More of Gen V.** BW2's transitions into battle, its evolution and egg-hatching scenes, and its 
 Critical Health! Low HP Theme. *All togglable in the options menu.*
 
-**Platinum's battle menus, recreated.** Since game now uses BW2's battle engine, it came bundled with its battle UI in the bottom screen as well.
-I retextured it to look as much as possible to Platinum's Battle UI, but if you notice some differences, that is why. Still if you prefer having BW2's UI,
-you can conffigure this in the options menu.
+**Platinum's battle menus, recreated.** Since the game now uses BW2's battle engine, it came bundled with its battle UI on the bottom screen as well.
+I retextured it to look as close as possible to Platinum's battle UI, but if you notice some differences, that is why. Still, if you prefer having BW2's UI,
+you can configure this in the options menu.
 
 
 
@@ -82,8 +82,9 @@ Both ROMs must be clean, unmodified dumps of your own cartridges. Trimmed dumps 
 
 ### Windows
 
-1. Download **`Platinum Reforged Anvil.exe`** from the [latest release](../../releases/latest).
-2. Open it.
+1. Download **`Platinum Reforged Anvil <version> (Windows).zip`** from the [latest release](../../releases/latest)
+   and unzip it.
+2. Open **`Platinum Reforged Anvil.exe`**.
 3. Choose your Platinum ROM and your Black 2 or White 2 ROM: click **Choose...**, or drop both files onto the
    window and Anvil puts each one in its slot.
 4. Click **Build Platinum Reforged**.
@@ -93,18 +94,19 @@ Both ROMs must be clean, unmodified dumps of your own cartridges. Trimmed dumps 
 
 ### Linux
 
-On Linux, Anvil is a command-line program. Download **`platinum-reforged-anvil`** from the
-[latest release](../../releases/latest), then in a terminal, in the folder you saved it to:
+On Linux, Anvil is a command-line program. Download **`Platinum Reforged Anvil <version> (Linux).tar.gz`** from
+the [latest release](../../releases/latest), then in a terminal, in the folder you saved it to:
 
 ```sh
-chmod +x platinum-reforged-anvil
+tar -xzf "Platinum Reforged Anvil <version> (Linux).tar.gz"
+cd "Platinum Reforged Anvil <version>"
 ./platinum-reforged-anvil --platinum "Platinum.nds" --black2 "Black 2.nds"
 ```
 
 ### Command line (both)
 
-The same build without the window. On Windows, download **`platinum-reforged-anvil.exe`**. On Linux, it's the
-program above.
+The same build without the window. On Windows, it's **`platinum-reforged-anvil.exe`**, in the same zip as the app.
+On Linux, it's the program above.
 
 ```sh
 platinum-reforged-anvil --platinum "Platinum.nds" --black2 "Black 2.nds" --out "Platinum Reforged.nds"
@@ -146,8 +148,9 @@ Platinum Reforged is built on the work of the Pokémon decompilation community:
 - [pret/pokeplatinum](https://github.com/pret/pokeplatinum), the Pokémon Platinum decompilation.
 - [pokebw2](https://github.com/fuddlesworth/pokebw2), the Pokémon Black 2 and White 2 decompilation.
 
-Anvil is made with [pywebview](https://pywebview.flowrl.com/), [bsdiff4](https://github.com/ilanschnell/bsdiff4),
-[ndspy](https://github.com/RoadrunnerWMC/ndspy) and [PyInstaller](https://pyinstaller.org/).
+Anvil is made with [Python](https://www.python.org/), [pywebview](https://pywebview.flowrl.com/),
+[bsdiff4](https://github.com/ilanschnell/bsdiff4), [Pillow](https://python-pillow.org/) and
+[PyInstaller](https://pyinstaller.org/). Their licences are in *NOTICES.txt*, which comes with each download.
 
 ## Disclaimer
 
