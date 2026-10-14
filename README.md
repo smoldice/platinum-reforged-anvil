@@ -4,7 +4,9 @@
 
 **Pokémon Platinum with BW2's battle engine.**<br>
 
-[**Build in your browser**](https://smoldice.github.io/platinum-reforged-anvil/build/) · [**Download**](../../releases/latest) · [Setup](#setup) · [Options](#in-game-options) · [Troubleshooting](#troubleshooting) · [Report a problem](../../issues)
+[![Play now in the web builder](https://img.shields.io/badge/Play_now-Web_builder-B00F16?style=for-the-badge&logo=webassembly&logoColor=white)](https://smoldice.github.io/platinum-reforged-anvil/build/)
+
+[**Download**](../../releases/latest) · [Setup](#setup) · [Options](#in-game-options) · [Troubleshooting](#troubleshooting) · [Report a problem](../../issues)
 
 </div>
 
