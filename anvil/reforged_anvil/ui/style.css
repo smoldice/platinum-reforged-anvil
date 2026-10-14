@@ -1,0 +1,355 @@
+/* Platinum Reforged Anvil. Light platinum surfaces, the logo's REFORGED red for actions, navy ink for text */
+:root {
+  --bg-top: #f8f9fb;
+  --bg-bottom: #dfe3e9;
+  --panel: #ffffff;
+  --ink: #16213a;
+  --ink-soft: #55607a;
+  --ink-faint: #8a93a6;
+  --line: #d9dee6;
+  --red: #b00f16;
+  --red-deep: #7c0000;
+  --red-glow: rgba(176, 15, 22, 0.28);
+  --blue: #316ab4;
+  --yellow: #ffcd00;
+  --ok: #1d8f53;
+  --bad: #c0262d;
+  --radius: 14px;
+  font-family: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  color: var(--ink);
+  background:
+    linear-gradient(115deg, transparent 0 38%, rgba(255, 255, 255, 0.55) 44%, transparent 52%),
+    linear-gradient(115deg, transparent 0 58%, rgba(255, 255, 255, 0.35) 62%, transparent 68%),
+    linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+  user-select: none;
+  overflow: hidden;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: minmax(380px, 0.92fr) 1fr;
+  grid-template-rows: minmax(0, 1fr);
+  height: 100%;
+}
+
+/* The left side: the logo, what Anvil does */
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 28px 40px 64px 44px;
+}
+.logo-wrap { display: flex; justify-content: center; }
+.logo {
+  width: 420px;
+  max-width: 100%;
+  filter: drop-shadow(0 10px 16px rgba(22, 33, 58, 0.16));
+}
+.tag {
+  align-self: center;
+  margin-top: 18px;
+  padding: 5px 16px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #2a3550, var(--ink));
+  color: #f3f5f9;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  box-shadow: 0 6px 16px rgba(22, 33, 58, 0.25);
+}
+.blurb {
+  margin: 28px 0 0;
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+.how {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+}
+.how li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0;
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.how span {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--panel);
+  border: 2px solid var(--red);
+  color: var(--red);
+  font-size: 13px;
+  font-weight: 700;
+}
+.version {
+  position: absolute;
+  left: 44px;
+  bottom: 28px;
+  color: var(--ink-faint);
+  font-size: 12px;
+}
+
+/* The right side */
+.panel {
+  position: relative;
+  margin: 24px 24px 24px 0;
+  padding: 34px 36px;
+  border-radius: 22px;
+  background: var(--panel);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 24px 60px rgba(22, 33, 58, 0.16),
+    0 2px 8px rgba(22, 33, 58, 0.06);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.view { display: flex; flex-direction: column; flex: 1; animation: rise 0.28s ease-out; }
+@keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.hint-line {
+  margin: 6px 0 22px;
+  color: var(--ink-soft);
+  font-size: 13.5px;
+}
+
+/* A ROM's slot */
+.slot {
+  display: grid;
+  grid-template-columns: 58px 1fr auto;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+  padding: 16px 16px 16px 18px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, #fbfcfd, #f3f5f8);
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+.slot.drag { border-color: var(--red); box-shadow: 0 0 0 4px var(--red-glow); }
+.slot.ok { border-color: rgba(29, 143, 83, 0.55); background: linear-gradient(180deg, #fbfefc, #f1f8f4); }
+.slot.bad { border-color: rgba(192, 38, 45, 0.6); background: linear-gradient(180deg, #fffbfb, #fbf1f1); }
+/* The cartridge: faded until the slot has its ROM */
+.cart {
+  display: block;
+  width: 58px;
+  opacity: 0.5;
+  filter: grayscale(0.4) drop-shadow(0 3px 5px rgba(22, 33, 58, 0.18));
+  transition: opacity 0.2s, filter 0.2s;
+}
+.slot.ok .cart, .slot.drag .cart { opacity: 1; filter: drop-shadow(0 3px 5px rgba(22, 33, 58, 0.22)); }
+.slot-title { font-size: 15.5px; font-weight: 700; }
+.slot-hint { margin-top: 2px; color: var(--ink-faint); font-size: 12.5px; }
+.slot-file { display: none; margin-top: 8px; font-size: 13px; line-height: 1.45; }
+.slot.ok .slot-file, .slot.bad .slot-file { display: block; }
+.slot-file .dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  vertical-align: 1px;
+}
+.slot.ok .dot { background: var(--ok); }
+.slot.bad .dot { background: var(--bad); }
+.file-title { font-weight: 600; }
+.slot.bad .file-title { color: var(--bad); }
+.file-name {
+  display: block;
+  margin-left: 16px;
+  color: var(--ink-faint);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+/* Buttons */
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+}
+button:disabled { cursor: default; }
+.browse {
+  padding: 9px 16px;
+  border-radius: 10px;
+  background: var(--panel);
+  border: 1.5px solid var(--line);
+  color: var(--ink);
+  font-size: 13.5px;
+  font-weight: 600;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s;
+}
+.browse:hover:not(:disabled) { border-color: #b8c0cc; box-shadow: 0 2px 8px rgba(22, 33, 58, 0.08); }
+.browse:active:not(:disabled) { transform: translateY(1px); }
+.browse:disabled { color: var(--ink-faint); background: #f6f7f9; }
+.browse.small { padding: 7px 12px; font-size: 12.5px; }
+.build {
+  margin-top: auto;
+  padding: 16px 22px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #d3242b, var(--red) 55%, var(--red-deep));
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  box-shadow: 0 10px 24px var(--red-glow), 0 1px 0 rgba(255, 255, 255, 0.35) inset;
+  transition: transform 0.1s, box-shadow 0.15s, filter 0.15s;
+}
+.build:hover:not(:disabled) { filter: brightness(1.06); box-shadow: 0 14px 30px var(--red-glow), 0 1px 0 rgba(255, 255, 255, 0.35) inset; }
+.build:active:not(:disabled) { transform: translateY(1px); }
+.build:disabled {
+  background: linear-gradient(180deg, #e3e6eb, #d5d9e0);
+  color: #9aa2b1;
+  box-shadow: none;
+}
+
+/* Where to save */
+.output {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  margin: 8px 0 26px;
+  padding: 12px 14px 12px 18px;
+  border-radius: var(--radius);
+  background: #f4f6f9;
+}
+.output-label { color: var(--ink-soft); font-size: 12.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+.output-path { font-size: 13px; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; direction: rtl; text-align: left; }
+
+/* Progress */
+.steps { list-style: none; margin: 26px 0 30px; padding: 0; }
+.steps li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 14px 0;
+  color: var(--ink-faint);
+  font-size: 15px;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.step-mark {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  position: relative;
+  flex: none;
+}
+.steps li.active { color: var(--ink); }
+.steps li.active .step-mark { border-color: var(--red); border-top-color: transparent; animation: spin 0.8s linear infinite; }
+.steps li.done { color: var(--ink); }
+.steps li.done .step-mark { border-color: var(--ok); background: var(--ok); }
+.steps li.done .step-mark::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.bar {
+  height: 12px;
+  border-radius: 999px;
+  background: #edf0f4;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(22, 33, 58, 0.08);
+}
+.fill {
+  width: 0;
+  height: 100%;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent) 0 0 / 200px 100% no-repeat,
+    linear-gradient(90deg, var(--red-deep), var(--red) 70%, #e0444a);
+  animation: shine 1.4s linear infinite;
+  transition: width 0.25s ease-out;
+}
+@keyframes shine { from { background-position: -200px 0, 0 0; } to { background-position: 600px 0, 0 0; } }
+.percent { margin-top: 10px; color: var(--ink-soft); font-size: 13px; font-weight: 600; text-align: right; }
+
+/* Done, and errors */
+#done, #error { align-items: center; text-align: center; justify-content: center; }
+.badge {
+  display: grid;
+  place-items: center;
+  width: 74px;
+  height: 74px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+}
+.badge svg { width: 40px; height: 40px; fill: none; stroke: #fff; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.badge.ok { background: linear-gradient(180deg, #2bb36d, var(--ok)); box-shadow: 0 12px 28px rgba(29, 143, 83, 0.3); }
+.badge.bad { background: linear-gradient(180deg, #df3b42, var(--bad)); box-shadow: 0 12px 28px rgba(192, 38, 45, 0.28); }
+.done-name { margin: 14px 0 2px; font-size: 16px; font-weight: 700; }
+.done-path { margin: 0; color: var(--ink-faint); font-size: 12.5px; overflow-wrap: anywhere; user-select: text; }
+.verified { margin: 20px 0 0; font-size: 12.5px; }
+.verified span {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: rgba(29, 143, 83, 0.12);
+  color: var(--ok);
+  font-weight: 700;
+}
+.error-text { max-width: 440px; margin: 14px 0 0; color: var(--ink-soft); font-size: 14px; line-height: 1.55; user-select: text; }
+.actions { display: flex; gap: 12px; margin-top: 30px; }
+.actions .build { margin-top: 0; padding: 13px 26px; font-size: 15px; }
+
+.toast {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  box-shadow: 0 10px 24px rgba(22, 33, 58, 0.25);
+  animation: rise 0.2s ease-out;
+}
+
+/* If the panel ever runs out of room, it scrolls (with a quiet scrollbar) rather than spilling out of the window */
+.panel::-webkit-scrollbar { width: 10px; }
+.panel::-webkit-scrollbar-thumb { border: 3px solid var(--panel); border-radius: 999px; background: #cdd3dc; }
+
+/* A short window: less air, so the Build button stays in view */
+@media (max-height: 680px) {
+  .panel { margin: 16px 16px 16px 0; padding: 24px 30px; }
+  .hint-line { margin-bottom: 14px; }
+  .slot { margin-bottom: 10px; padding-top: 12px; padding-bottom: 12px; }
+  .output { margin: 4px 0 16px; }
+}
+
+@media (max-width: 1000px) {
+  .app { grid-template-columns: 350px 1fr; }
+  .hero { padding: 24px 24px 60px 30px; }
+  .version { left: 30px; }
+}

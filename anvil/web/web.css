@@ -1,0 +1,31 @@
+/* Anvil's page in a browser (the site's build page): the app's own look (style.css), with a bar back to the site
+   above it; the app fills the rest, and the page scrolls when the window is smaller than the app. */
+html, body.web { overflow: auto; }
+body.web {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  height: auto;
+  user-select: auto;
+}
+body.web .app { flex: 1; height: auto; min-height: 660px; min-width: 900px; }
+
+.site-bar {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 11px 28px;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.62);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(6px);
+}
+.site-bar a { color: var(--ink); text-decoration: none; font-weight: 600; }
+.site-bar a:hover { color: var(--red); }
+.site-bar .home { font-weight: 700; letter-spacing: 0.01em; }
+.site-bar .spacer { flex: 1; }
+.site-bar .quiet { color: var(--ink-soft); font-weight: 500; }
+
+/* The browser saves the ROM itself: no folder to pick */
+body.web #change-output { display: none; }
+body.web .output { grid-template-columns: auto 1fr; }

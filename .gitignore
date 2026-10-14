@@ -1,0 +1,7 @@
+__pycache__/
+.venv/
+anvil/build/
+anvil/dist/
+anvil/reforged_anvil/data/*.bundle
+*.nds
+*.sav

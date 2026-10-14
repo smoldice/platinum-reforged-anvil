@@ -1,0 +1,3 @@
+# Files keep their line endings exactly as committed, whatever core.autocrlf says: the Linux build runs these
+# scripts in a container, and Linux tools break on CRLF
+* -text

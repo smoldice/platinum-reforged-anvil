@@ -183,6 +183,13 @@ No. Platinum Reforged is only available through Anvil, built from games you own.
 Yes. Platinum Reforged works with your original Platinum save. If future features need changes an original save can't
 hold, you will be able to opt out of these in the anvil tool.
 
+## Source code
+
+Anvil is open source, under the MIT License. [Its source](../../) is on GitHub, and
+[DEVELOPING.md](../../blob/main/DEVELOPING.md) says how to run and build it. The licence doesn't cover the game Anvil
+builds, or Platinum Reforged's name and art: [LICENSE.md](../../blob/main/LICENSE.md) says what it covers. The game's
+own source isn't public.
+
 ## Credits
 
 Platinum Reforged is built on the work of the Pokémon decompilation community:

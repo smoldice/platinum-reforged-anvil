@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Platinum Reforged Anvil</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="hero">
+    <div class="logo-wrap"><img class="logo" src="logo.png" alt="Platinum Reforged" draggable="false"></div>
+    <div class="tag">Anvil</div>
+    <p class="blurb">Builds Pokémon Platinum Reforged from your own copies of Pokémon Platinum and Pokémon Black&nbsp;2
+      or White&nbsp;2.</p>
+    <ol class="how">
+      <li><span>1</span>Choose your Platinum ROM</li>
+      <li><span>2</span>Choose your Black 2 or White 2 ROM</li>
+      <li><span>3</span>Build</li>
+    </ol>
+    <div class="version" id="version"></div>
+  </aside>
+
+  <main class="panel">
+    <section id="setup" class="view">
+      <h1>Your ROMs</h1>
+      <p class="hint-line" id="hint-line">Click <b>Choose</b>, or drop the files anywhere on this window.</p>
+
+      <div class="slot" id="slot-platinum" data-slot="platinum">
+        <img class="cart" src="cart.png" alt="" draggable="false">
+        <div class="slot-body">
+          <div class="slot-title">Pokémon Platinum</div>
+          <div class="slot-hint">USA · Rev 0 or Rev 1</div>
+          <div class="slot-file"><span class="dot"></span><span class="file-title"></span><span class="file-name"></span></div>
+        </div>
+        <button class="browse" data-slot="platinum">Choose…</button>
+      </div>
+
+      <div class="slot" id="slot-gen5" data-slot="gen5">
+        <img class="cart" src="cart.png" alt="" draggable="false">
+        <div class="slot-body">
+          <div class="slot-title">Pokémon Black 2 or White 2</div>
+          <div class="slot-hint">USA, Europe</div>
+          <div class="slot-file"><span class="dot"></span><span class="file-title"></span><span class="file-name"></span></div>
+        </div>
+        <button class="browse" data-slot="gen5">Choose…</button>
+      </div>
+
+      <div class="output">
+        <div class="output-label">Save as</div>
+        <div class="output-path" id="output-path">Choose your Platinum ROM first</div>
+        <button class="browse small" id="change-output" disabled>Change…</button>
+      </div>
+
+      <button class="build" id="build" disabled>Build Platinum Reforged</button>
+    </section>
+
+    <section id="progress" class="view" hidden>
+      <h1>Building…</h1>
+      <ul class="steps">
+        <li data-step="read"><span class="step-mark"></span>Reading your ROMs</li>
+        <li data-step="make"><span class="step-mark"></span>Making the sprites from your ROMs</li>
+        <li data-step="build"><span class="step-mark"></span>Building Platinum Reforged</li>
+        <li data-step="save"><span class="step-mark"></span>Saving and verifying</li>
+      </ul>
+      <div class="bar"><div class="fill" id="bar-fill"></div></div>
+      <div class="percent" id="percent">0%</div>
+    </section>
+
+    <section id="done" class="view" hidden>
+      <div class="badge ok"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h1>Platinum Reforged is ready</h1>
+      <p class="done-name" id="done-name"></p>
+      <p class="done-path" id="done-path"></p>
+      <p class="verified"><span>Verified</span></p>
+      <div class="actions">
+        <button class="build" id="show-folder">Show in folder</button>
+        <button class="browse" id="again">Build another</button>
+      </div>
+    </section>
+
+    <section id="error" class="view" hidden>
+      <div class="badge bad"><svg viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></svg></div>
+      <h1>That didn't work</h1>
+      <p class="error-text" id="error-text"></p>
+      <div class="actions"><button class="build" id="back">Back</button></div>
+    </section>
+
+    <div class="toast" id="toast" hidden></div>
+  </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

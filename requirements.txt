@@ -1,0 +1,7 @@
+# Anvil from source: python -m pip install -r requirements.txt
+# Pillow exactly this version: Anvil makes sprites from the player's ROMs, and they must come out as the release's
+pillow==12.3.0
+# The Windows app's window (the command line doesn't need it)
+pywebview>=6.2.1; sys_platform == "win32"
+# Building the programs (anvil/release/make_exe.py)
+pyinstaller>=6.22
