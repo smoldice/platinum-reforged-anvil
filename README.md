@@ -154,3 +154,6 @@ Anvil is made with [pywebview](https://pywebview.flowrl.com/), [bsdiff4](https:/
 Platinum Reforged is a free, unofficial fan project. It is not affiliated with, endorsed by or sponsored by Nintendo,
 Game Freak, Creatures Inc. or The Pokémon Company. Pokémon and all related names are trademarks of their respective
 owners. This repository contains no ROMs and no copyrighted game data. Use only games you own.
+
+Platinum Reforged was made with the help of [Claude](https://claude.ai), Anthropic's AI model, which wrote much of
+the code and tools under my direction. The ideas, design choices and playtesting are mine.
