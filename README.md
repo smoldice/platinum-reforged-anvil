@@ -48,12 +48,19 @@ depending on where you are standing: lawn, dirt path, tall grass, mountain, cave
   I'll try to add more as I go.
   *Togglable in the options menu.*
 
-| | Before | After |
-| --- | :---: | :---: |
-| **Lass**<br>BW2's, retextured | ![BW2's Lass](assets/examples/lass_before.gif) | ![The retextured Lass](assets/examples/lass_after.gif) |
-| **Fisherman**<br>BW2's, retextured | ![BW2's Fisherman](assets/examples/fisherman_before.gif) | ![The retextured Fisherman](assets/examples/fisherman_after.gif) |
-| **Roughneck**<br>Platinum's, animated | ![Platinum's Roughneck](assets/examples/roughneck_before.png) | ![The animated Roughneck](assets/examples/roughneck_after.gif) |
-| **Aroma Lady**<br>Platinum's, animated | ![Platinum's Aroma Lady](assets/examples/aroma_lady_before.png) | ![The animated Aroma Lady](assets/examples/aroma_lady_after.gif) |
+*Retextured: BW2's sprites and animations, in Platinum's look.*
+
+| | Platinum | BW2 | Retextured | Overworld |
+| --- | :---: | :---: | :---: | :---: |
+| **Lass** | ![Platinum's Lass](assets/examples/lass_platinum.png) | ![BW2's Lass](assets/examples/lass_bw2.gif) | ![The retextured Lass](assets/examples/lass_retextured.gif) | ![The Lass on the overworld](assets/examples/lass_overworld.gif) |
+| **Fisherman** | ![Platinum's Fisherman](assets/examples/fisherman_platinum.png) | ![BW2's Fisherman](assets/examples/fisherman_bw2.gif) | ![The retextured Fisherman](assets/examples/fisherman_retextured.gif) | ![The Fisherman on the overworld](assets/examples/fisherman_overworld.gif) |
+
+*Animated: Platinum's own sprites.*
+
+| | Platinum | Animated | Overworld |
+| --- | :---: | :---: | :---: |
+| **Roughneck** | ![Platinum's Roughneck](assets/examples/roughneck_platinum.png) | ![The animated Roughneck](assets/examples/roughneck_animated.gif) | ![The Roughneck on the overworld](assets/examples/roughneck_overworld.gif) |
+| **Aroma Lady** | ![Platinum's Aroma Lady](assets/examples/aroma_lady_platinum.png) | ![The animated Aroma Lady](assets/examples/aroma_lady_animated.gif) | ![The Aroma Lady on the overworld](assets/examples/aroma_lady_overworld.gif) |
 
 **More of Gen V.** BW2's transitions into battle, its evolution and egg-hatching scenes, and its 
 Critical Health! Low HP Theme. *All togglable in the options menu.*
