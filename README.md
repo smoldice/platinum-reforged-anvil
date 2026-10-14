@@ -26,6 +26,11 @@ Anvil takes your own Platinum and Black 2 or White 2 and writes a new ROM,
 
 ## What's new
 
+<p align="center">
+  <img src="assets/examples/wild_battle.gif" alt="A wild Starly appears on Route 201, in BW2's battle engine with Platinum's battle menus" width="256"><br>
+  <em>A wild Pokémon on Route 201: BW2's battle engine, with Platinum's battle menus on the Touch Screen.</em>
+</p>
+
 **Gen V battles everywhere.** Wild Pokémon, trainers, double and tag battles, legendaries, the catching tutorial,
 the Safari Zone, Pal Park and the Battle Frontier.
 
@@ -42,6 +47,13 @@ depending on where you are standing: lawn, dirt path, tall grass, mountain, cave
   sprites and animations to look like their Platinum counterparts. For Roughneck, Clown and Aroma Lady I animated their already existing battle sprites.
   I'll try to add more as I go.
   *Togglable in the options menu.*
+
+| | Before | After |
+| --- | :---: | :---: |
+| **Lass**<br>BW2's, retextured | ![BW2's Lass](assets/examples/lass_before.gif) | ![The retextured Lass](assets/examples/lass_after.gif) |
+| **Fisherman**<br>BW2's, retextured | ![BW2's Fisherman](assets/examples/fisherman_before.gif) | ![The retextured Fisherman](assets/examples/fisherman_after.gif) |
+| **Roughneck**<br>Platinum's, animated | ![Platinum's Roughneck](assets/examples/roughneck_before.png) | ![The animated Roughneck](assets/examples/roughneck_after.gif) |
+| **Aroma Lady**<br>Platinum's, animated | ![Platinum's Aroma Lady](assets/examples/aroma_lady_before.png) | ![The animated Aroma Lady](assets/examples/aroma_lady_after.gif) |
 
 **More of Gen V.** BW2's transitions into battle, its evolution and egg-hatching scenes, and its 
 Critical Health! Low HP Theme. *All togglable in the options menu.*
