@@ -15,10 +15,10 @@ As much of Gen V as you want, and as much of Platinum as you want to keep.
 
 Platinum Reforged is a ROM hack of Pokémon Platinum (USA) that brings in Black 2 and White 2's (BW2) battle engine, and
 more of Gen V along with it. I have plenty more ideas on the way, but the goal will always be the same: to let
-everyone forge their own Gen IV experience. That's why everything new is configurable, so you can play it exactly
-the way you like. 😁
+everyone forge their own Gen IV experience (yes, I did the thing). That's why Platinum Reforged will always have
+a configuration-first approach when implementing new features.
 
-This repository hosts the downloads for **Platinum Reforged Anvil**, the program that builds the game.
+This repository hosts the downloads for **Platinum Reforged Anvil**, the tool that builds southe game.
 Anvil takes your own Platinum and Black 2 or White 2 and writes a new ROM,
 *Pokemon Platinum Reforged.nds*.
 
