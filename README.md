@@ -142,9 +142,8 @@ ROMs you gave it (the output of `--identify` helps), and what happened.
 No. Platinum Reforged is only available through Anvil, built from games you own.
 
 **Can I keep playing my Platinum save?**<br>
-Yes. Platinum Reforged works with your original Platinum save: copy it next to the new ROM and give it the same
-name (for example, *Pokemon Platinum Reforged.sav*). Future features might need changes an original save can't
-hold. If that happens, they'll be options you choose in Anvil when you build, so you can always keep your save.
+Yes. Platinum Reforged works with your original Platinum save. If future features need changes an original save can't
+hold, you will be able to opt out of these in the anvil tool.
 
 ## Credits
 
