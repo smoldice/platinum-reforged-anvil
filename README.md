@@ -65,6 +65,14 @@ or as little of Gen V as you like.
 | EGG HATCHING | The egg-hatching scene | GEN V |
 | LOW HP | BW2's pinch music, or Platinum's beep, when your Pokémon's HP is low | GEN V |
 
+## Planned features
+
+- **Level caps** before each Gym. *Togglable.*
+- **Exp. Share for the whole team**, the modern way: your whole party gets experience. *Togglable.*
+- **Experience for catching Pokémon.** *Togglable.*
+- **A difficulty setting.**
+- More to come!
+
 ## What you need
 
 1. **Pokémon Platinum (USA)**, Rev 0 or Rev 1, as an `.nds` file (game code `CPUE`).
