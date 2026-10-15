@@ -27,7 +27,7 @@ Anvil takes your own Platinum and Black 2 or White 2 and writes a new ROM,
 
 <p align="center">
   <img src="assets/examples/wild_battle.gif" alt="A wild Starly appears on Route 201, in BW2's battle engine with Platinum's battle menus" width="256"><br>
-  <em>A wild Pokémon on Route 201: BW2's battle engine, with Platinum's battle menus on the Touch Screen.</em>
+  <em>A wild Pokémon on Route 201: BW2's battle engine.</em>
 </p>
 
 **Gen V battles everywhere.** Wild Pokémon, trainers, double and tag battles, legendaries, the catching tutorial,
