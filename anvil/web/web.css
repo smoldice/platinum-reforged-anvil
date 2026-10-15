@@ -1,5 +1,5 @@
 /* Anvil's page in a browser (the site's build page): the app's own look (style.css), with a bar back to the site
-   above it; the app fills the rest, and the page scrolls when the window is smaller than the app. */
+   above it; the app fills the rest. On a narrow screen (a phone) its two sides stack, at the end of this file. */
 html, body.web { overflow: auto; }
 body.web {
   display: flex;
@@ -8,7 +8,7 @@ body.web {
   height: auto;
   user-select: auto;
 }
-body.web .app { flex: 1; height: auto; min-height: 660px; min-width: 900px; }
+body.web .app { flex: 1; height: auto; min-height: 660px; }
 
 .site-bar {
   display: flex;
@@ -29,3 +29,24 @@ body.web .app { flex: 1; height: auto; min-height: 660px; min-width: 900px; }
 /* The browser saves the ROM itself: no folder to pick */
 body.web #change-output { display: none; }
 body.web .output { grid-template-columns: auto 1fr; }
+
+/* A narrow screen: the logo and what Anvil does on top, the panel under it, and the page scrolls down, never
+   sideways. The steps (1, 2, 3) are left out: the panel says the same, one slot at a time. */
+@media (max-width: 760px) {
+  body.web .app { display: block; min-height: 0; }
+  body.web .hero { padding: 20px 16px 4px; }
+  body.web .logo { width: 260px; }
+  body.web .tag { margin-top: 12px; }
+  body.web .blurb { margin: 14px auto 0; max-width: 420px; font-size: 14px; text-align: center; }
+  body.web .how { display: none; }
+  body.web .version { position: static; margin-top: 8px; text-align: center; }
+  body.web .panel { margin: 14px 16px 24px; padding: 22px 16px; overflow: visible; }
+  body.web .slot { grid-template-columns: 44px 1fr; gap: 12px; padding: 14px; }
+  body.web .slot .cart { width: 44px; }
+  body.web .slot .browse { grid-column: 1 / -1; padding: 11px 16px; }
+  body.web .output-path { white-space: normal; overflow-wrap: anywhere; direction: ltr; }
+  body.web .actions { flex-direction: column; align-self: stretch; }
+  body.web .error-text { max-width: none; }
+  .site-bar { flex-wrap: wrap; gap: 6px 16px; padding: 10px 16px; }
+  .site-bar .quiet, .site-bar .spacer { display: none; }
+}

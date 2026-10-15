@@ -3,6 +3,7 @@
 // download. Loaded before app.js; it marks the page as the web one (body.web) and starts loading Anvil at once.
 (() => {
   const worker = new Worker("worker.js", { type: "module" });
+  const TOUCH = matchMedia("(pointer: coarse)").matches; // a phone or tablet
   const waiting = new Map();
   let next = 0;
   let chunks = [];
@@ -31,7 +32,9 @@
   const ready = call("start").then((info) => {
     outputName = info.output;
     document.body.classList.remove("loading");
-    $("hint-line").innerHTML = "Click <b>Choose</b>, or drop the files anywhere on this page.";
+    // A touch screen has nothing to drop files with
+    $("hint-line").innerHTML = TOUCH ? "Tap <b>Choose</b> for each ROM."
+      : "Click <b>Choose</b>, or drop the files anywhere on this page.";
     return info;
   });
   ready.catch((e) => {
@@ -62,7 +65,8 @@
       pick_rom: (slot) => new Promise((resolve) => {
         const input = document.createElement("input");
         input.type = "file";
-        input.accept = ".nds";
+        // Phones' file pickers don't know .nds and can grey every ROM out: no filter there
+        if (!TOUCH) input.accept = ".nds";
         input.onchange = async () => resolve(input.files[0] ? await describe(input.files[0], slot) : null);
         input.click();
       }),

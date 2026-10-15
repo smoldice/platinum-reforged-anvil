@@ -93,6 +93,7 @@ a:hover { color: var(--red-deep); }
   background: #f0f2f6;
   font-family: Consolas, "Cascadia Mono", ui-monospace, monospace;
   font-size: 0.9em;
+  overflow-wrap: anywhere;
 }
 .content pre {
   overflow-x: auto;
@@ -131,4 +132,7 @@ footer a { color: var(--ink-soft); }
   .hero { padding-top: 32px; }
   .content { margin: 18px 12px 32px; padding: 6px 20px 26px; }
   .content h2 { font-size: 22px; }
+  /* A table wider than the screen (the sprites') scrolls in its own box, not the page */
+  .content table { display: block; overflow-x: auto; }
+  .content td img { max-width: none; }  /* full size: the table scrolls, the pictures don't shrink */
 }

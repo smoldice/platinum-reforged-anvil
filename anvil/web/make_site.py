@@ -144,7 +144,8 @@ def build_page(dev: bool) -> str:
 """
     scripts = '<script src="web.js"></script>\n' + ('<script src="dev.js"></script>\n' if dev else "")
     for old, new in [
-        ('<meta charset="utf-8">\n', '<meta charset="utf-8">\n<meta name="viewport" content="width=device-width">\n'
+        ('<meta charset="utf-8">\n', '<meta charset="utf-8">\n'
+                                     '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
                                      '<link rel="icon" href="../assets/icon.png">\n'),
         ('<link rel="stylesheet" href="style.css">\n', '<link rel="stylesheet" href="style.css">\n'
                                                        '<link rel="stylesheet" href="web.css">\n'),
