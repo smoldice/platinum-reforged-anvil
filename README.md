@@ -16,9 +16,8 @@
 ## What it is
 
 Platinum Reforged is a ROM hack of Pokémon Platinum that brings in Black 2 and White 2's battle engine, and
-more of Gen V along with it. I have plenty more ideas on the way, but the goal will always be the same: to
-experience Platinum reforged in Gen V's more modern graphics (yes, I did the thing). If you'd rather keep some of
-Platinum's look, many of the changes can be switched back in the options menu.
+more of Gen V along with it. The goal of this romhack is to create a Platinum experience in Gen V's more modern
+graphics.
 
 This is the home of **Platinum Reforged Anvil**, the tool that builds the game.
 Anvil takes your own Platinum and Black 2 or White 2 and writes a new ROM,
