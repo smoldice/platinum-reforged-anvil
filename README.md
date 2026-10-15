@@ -120,7 +120,7 @@ about 15 MB to run Anvil, and a build takes about a minute.
 
 ### Windows
 
-1. Download **`Platinum Reforged Anvil <version> (Windows).zip`** from the [latest release](../../releases/latest)
+1. Download **`Platinum-Reforged-Anvil-<version>-Windows.zip`** from the [latest release](../../releases/latest)
    and unzip it.
 2. Open **`Platinum Reforged Anvil.exe`**.
 3. Choose your Platinum ROM and your Black 2 or White 2 ROM: click **Choose...**, or drop both files onto the
@@ -132,11 +132,11 @@ about 15 MB to run Anvil, and a build takes about a minute.
 
 ### Linux
 
-On Linux, Anvil is a command-line program. Download **`Platinum Reforged Anvil <version> (Linux).tar.gz`** from
+On Linux, Anvil is a command-line program. Download **`Platinum-Reforged-Anvil-<version>-Linux.tar.gz`** from
 the [latest release](../../releases/latest), then in a terminal, in the folder you saved it to:
 
 ```sh
-tar -xzf "Platinum Reforged Anvil <version> (Linux).tar.gz"
+tar -xzf Platinum-Reforged-Anvil-<version>-Linux.tar.gz
 cd "Platinum Reforged Anvil <version>"
 ./platinum-reforged-anvil --platinum "Platinum.nds" --black2 "Black 2.nds"
 ```

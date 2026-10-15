@@ -5,10 +5,10 @@ PyInstaller doesn't cross-build, so each platform's programs are made on that pl
   Windows: .venv/Scripts/python anvil/release/make_exe.py  ->  anvil/dist/windows/
     Platinum Reforged Anvil.exe       the desktop app (no console)
     platinum-reforged-anvil.exe       the command line (no app; the same building)
-    Platinum Reforged Anvil <version> (Windows).zip
+    Platinum-Reforged-Anvil-<version>-Windows.zip
   Linux: anvil/release/make_linux.sh (in a container, Ubuntu 22.04)  ->  anvil/dist/linux/
     platinum-reforged-anvil           the command line (on Linux there's no app: the owner's call, 2026-10-14)
-    Platinum Reforged Anvil <version> (Linux).tar.gz
+    Platinum-Reforged-Anvil-<version>-Linux.tar.gz
 
 Needs PyInstaller and Pillow (and pywebview for the Windows app); and reforged_anvil/data/reforged.bundle, made by
 make_release.py (or, from the public source, a release's). The programs carry the game build's converters
@@ -275,13 +275,15 @@ def main():
     dist.mkdir(parents=True, exist_ok=True)
 
     folder = f"{APP_NAME} {__version__}"
+    # The archives' names have no spaces or brackets: GitHub turns those into dots in a release's file names
+    stem = f"{APP_NAME.replace(' ', '-')}-{__version__}"
     kinds = [("cli", CLI_NAME)] if LINUX else [("app", APP_NAME), ("cli", CLI_NAME)]
     programs = [program(kind, name, work, dist) for kind, name in kinds]
     texts = {"README.txt": (ANVIL / "README.txt").read_bytes(),
              "NOTICES.txt": notices([work / kind / name for kind, name in kinds]).encode("utf-8")}
     (dist / "NOTICES.txt").write_bytes(texts["NOTICES.txt"])
     if LINUX:
-        archive = dist / f"{folder} (Linux).tar.gz"
+        archive = dist / f"{stem}-Linux.tar.gz"
         with tarfile.open(archive, "w:gz") as tar:
             for path in programs:
                 info = tar.gettarinfo(path, f"{folder}/{path.name}")
@@ -293,7 +295,7 @@ def main():
                 info.size, info.mode = len(data), 0o644
                 tar.addfile(info, io.BytesIO(data))
     else:
-        archive = dist / f"{folder} (Windows).zip"
+        archive = dist / f"{stem}-Windows.zip"
         with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as z:
             for exe in programs:
                 z.write(exe, f"{folder}/{exe.name}")
