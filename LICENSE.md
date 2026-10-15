@@ -3,7 +3,7 @@
 ## What it covers
 
 The MIT License below covers Platinum Reforged Anvil's own code and documentation in this repository: what is in
-`anvil/` and `tools/port/`, and `DEVELOPING.md`, except for what is listed under "What it doesn't cover". Nothing
+`anvil/` and `tools/port/`, except for what is listed under "What it doesn't cover". Nothing
 else in this repository is under it.
 
 ## What it doesn't cover
