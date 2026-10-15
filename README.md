@@ -186,9 +186,7 @@ hold, you will be able to opt out of these in the anvil tool.
 ## Source code
 
 Anvil is open source, under the MIT License. [Its source](../../) is on GitHub, and
-[DEVELOPING.md](../../blob/main/DEVELOPING.md) says how to run and build it. The licence doesn't cover the game Anvil
-builds, or Platinum Reforged's name and art: [LICENSE.md](../../blob/main/LICENSE.md) says what it covers. The game's
-own source isn't public.
+[DEVELOPING.md](../../blob/main/DEVELOPING.md) says how to run and build it. Also refer to: [LICENSE.md](../../blob/main/LICENSE.md).
 
 ## Credits
 
