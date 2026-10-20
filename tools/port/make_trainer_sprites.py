@@ -5,12 +5,15 @@ trainer in the battle looks as in Platinum:
 - The front sprites (a/0/7/1): one for each of Platinum's trainer classes, at FRONT_BASE plus the class's number,
   which the port's battle uses as the sprite (gen5_trainer.c). They come after the Black 2 sprites the battle still
   shows: its World Tournament's Sinnoh Gym Leaders (129 to 136) and Cynthia (91), which have more animation than
-  Platinum's, so the user chose them for those characters. Six classes' are Black 2's own sprite and animation of
-  the class, retextured to Platinum's look (retexture.py, RETEXTURES): the user's, reviewed in docs/retextured-trainers.md.
+  Platinum's, so the user chose them for those characters. Thirteen classes' are Black 2's own sprite and animation of
+  the class, retextured to Platinum's look (retexture.py, RETEXTURES): the user's, reviewed in
+  docs/retextured-trainers.md.
   The Roughneck's, the Clown's and the Aroma Lady's are Platinum's own frame, animated by a rig (trainer_rig.py, RIGS):
-  the user's, in docs/roughneck-animation.md, docs/clown-animation.md and docs/aroma-lady-animation.md. Those nine
-  classes also get Platinum's own sprite after the last class's (PLATINUM_ORIGINALS), which the battle shows with the
-  TRAINERS option at PLATINUM (gen5_trainer.c).
+  the user's, in docs/roughneck-animation.md, docs/clown-animation.md and docs/aroma-lady-animation.md. A rig can
+  also be made in Aseprite and packed into anim_<class>.py (aseprite_rig.py, docs/aseprite-animations.md): the
+  Picnicker's (docs/picnicker-animation.md) and the Bug Catcher's (docs/bug-catcher-animation.md). The
+  classes with a retexture or a rig also get Platinum's own sprite after the last class's (PLATINUM_ORIGINALS),
+  which the battle shows with the CUSTOM SPRITES option off (gen5_trainer.c).
 - The back sprites (a/0/7/2): Lucas and Dawn in place of Nate and Rosa, which Black 2's trainer class table gives
   the player classes 0 and 1, and the partners' (Cheryl, Riley…) in place of Black 2's partners (BACKS).
 
@@ -46,8 +49,9 @@ FILE_COUNT = 8
 # these indices
 BACKS = {0: "player_male", 1: "player_female", 2: "trainer_cheryl", 3: "trainer_riley", 4: "trainer_marley",
          5: "trainer_buck", 6: "trainer_mira", 7: "rival", 8: "dp_player_male", 9: "dp_player_female"}
-# Where Platinum's front sprites start: after the last Black 2 sprite the battle shows, Volkner's. Black 2 has 188 and
-# GetTrSpriteBaseDatID returns a u8, so the last must stay below 256
+# Where Platinum's front sprites start: after the last Black 2 sprite the battle shows, Volkner's. Black 2 has 188.
+# GetTrSpriteBaseDatID returns a u8, but its callers don't cut the value to a byte, so the port's (gen5_trainer.c)
+# returns slots past 255
 FRONT_BASE = 137
 # Front sprites that are Black 2's, retextured to Platinum's look (retexture.py), by Platinum class: each settings
 # module's B2_SPRITE is its Black 2 sprite, still Black 2's own when replace() reads it
@@ -58,13 +62,24 @@ RETEXTURES = {
     "worker": "retexture_worker",
     "lass": "retexture_lass",
     "waitress": "retexture_waitress",
+    "black_belt": "retexture_black_belt",
+    "hiker": "retexture_hiker",
+    "psychic_male": "retexture_psychic_male",
+    "psychic_female": "retexture_psychic_female",
+    "rich_boy": "retexture_rich_boy",
+    "gentleman": "retexture_gentleman",
+    "youngster": "retexture_youngster",
 }
-# Front sprites animated from Platinum's own frame by a rig (trainer_rig.py), by Platinum class
-RIGS = {"roughneck": "rig_roughneck", "clown": "rig_clown", "aroma_lady": "rig_aroma_lady"}
+# Front sprites animated from Platinum's own frame by a rig (trainer_rig.py), by Platinum class: written by hand
+# (rig_<class>), or made in Aseprite and packed (anim_<class>, aseprite_rig.py)
+RIGS = {"roughneck": "rig_roughneck", "clown": "rig_clown", "aroma_lady": "rig_aroma_lady",
+        "picnicker": "anim_picnicker", "bug_catcher": "anim_bug_catcher"}
 # The classes whose slot has the user's sprite, also as Platinum's own after the last class's slot, in this order, for
-# the TRAINERS option at PLATINUM (gen5_trainer.c: sGen5CustomClasses)
+# the CUSTOM SPRITES option off (gen5_trainer.c: sGen5CustomClasses, which must list them in the same order): a new
+# one goes at the end, so the others keep their slots
 PLATINUM_ORIGINALS = ["ace_trainer_male", "ace_trainer_female", "fisherman", "worker", "roughneck", "lass",
-                      "waitress", "clown", "aroma_lady"]
+                      "waitress", "clown", "aroma_lady", "picnicker", "black_belt", "hiker", "psychic_male",
+                      "psychic_female", "rich_boy", "gentleman", "bug_catcher", "youngster"]
 # The Black 2 sprites whose files the new ones take their headers from: Nate's back, the Youngster's front
 BACK_TEMPLATE = 0
 FRONT_TEMPLATE = 2
@@ -278,7 +293,8 @@ def replace(narc_data: bytes, sprites: dict, side: str, template: int, platinum:
 
 def update_fronts(narc_data: bytes, platinum: PlatinumRom) -> bytes:
     classes = TRAINER_CLASSES
-    assert FRONT_BASE + len(classes) + len(PLATINUM_ORIGINALS) <= 256
+    assert sorted(PLATINUM_ORIGINALS) == sorted({*RETEXTURES, *RIGS}), \
+        "PLATINUM_ORIGINALS (and gen5_trainer.c's sGen5CustomClasses) must list every class with a retexture or a rig"
     sprites = {FRONT_BASE + i: cls for i, cls in enumerate(classes)}
     originals = {FRONT_BASE + len(classes) + i: cls for i, cls in enumerate(PLATINUM_ORIGINALS)}
     return replace(narc_data, {**sprites, **originals}, "front", FRONT_TEMPLATE, platinum, plain=originals)

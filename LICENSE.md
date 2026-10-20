@@ -17,7 +17,9 @@ owners:
   (`assets/`, `anvil/assets/`, and the images in `anvil/reforged_anvil/ui/`), and the designs of its custom trainer
   sprites (`tools/port/rig_*.py` and `tools/port/retexture_*.py`, which Anvil runs to make them).
 - **Pokémon.** Nintendo's games and everything in them, and anything Anvil reads from, or makes from, the player's
-  own ROMs. Pokémon and all related names are trademarks of their respective owners.
+  own ROMs; and the Pokédex's map of Sinnoh (`tools/port/dex_map_bulbapedia.py`) and its small picture of Sinnoh
+  (`tools/port/dex_area_picture_art.py`), reduced from a map of Sinnoh on Bulbapedia. Pokémon and all related names
+  are trademarks of their respective owners.
 - **Other people's work**, which keeps its own terms: `game/tools/msgenc/charmap.txt` (from the
   [pret/pokeplatinum](https://github.com/pret/pokeplatinum) decompilation) and the licence texts in
   `anvil/release/notices/`. See `NOTICE.md`.

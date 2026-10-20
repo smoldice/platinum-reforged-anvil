@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Platinum's own art for the port's converters, read from a Platinum ROM: the vanilla build's in the game's build
-(extract_assets.py), the player's in Anvil, which makes the converted art on the player's machine so its download
+"""Platinum's own art for the port's converters, read from a Platinum ROM: a dump or the vanilla build's in the game's
+build (extract_assets.py), the player's in Anvil, which makes the converted art on the player's machine so its download
 carries none of Nintendo's. Each reader gives what the decomp's file has, byte for byte, as the converters used to
 read it from there; `platinum_rom.py ROM GAME_DIR` checks every one against the decomp.
 
@@ -13,7 +13,11 @@ read it from there; `platinum_rom.py ROM GAME_DIR` checks every one against the 
 - font(member): a font of pl_font.narc as its PNG (16 glyphs a row, 2 bits a pixel) and its glyphs' widths.
 - palette(archive, member): an NCLR's colours (15-bit), as the decomp's JASC palettes have them shifted down.
 - cursor(): the battle's key cursor, as res/graphics/battle/interface/cursor.png.
+- type_icon(member): a type icon of the battle's sprites, as res/graphics/battle/type_icons/<type>.png (32x16, its
+  colours a row of type_icons/shared.pal: palette(BATTLE_SPRITES, TYPE_ICON_PALETTE)).
 - move_palettes(): the move buttons' palettes by type, as src/overlay011/move_palettes.c has them.
+- screen(archive, member): an NSCR's width, height and entries (nscr_screen), as the decomp's .NSCR has them: the
+  Pokédex's area map for dex_map_art.py.
 - charmap(): the decomp's character map (game/tools/msgenc/charmap.txt), which isn't the ROM's but a table of its
   text encoding; Anvil carries it.
 
@@ -66,6 +70,10 @@ OAM_SIZES = {(0, 0): (8, 8), (0, 1): (16, 16), (0, 2): (32, 32), (0, 3): (64, 64
 # and the key cursor's picture, then its cells (interface/cursor.png, cursor_cell.json)
 BATTLE_SPRITES = "battle/graphic/pl_batt_obj.narc"
 INTERFACE_PALETTE, CURSOR = 72, 250
+# and the type icons' palette, whose ??? colour mystery_type.py takes, and the ??? icon (type_icons/shared.pal,
+# type_icons/mystery.png)
+TYPE_ICON_PALETTE, MYSTERY_ICON = 74, 236
+TYPE_ICON_SIZE = (32, 16)
 # The fonts (game/res/fonts/pl_font.order)
 FONTS = "graphic/pl_font.narc"
 FONT_SUBSCREEN = 2
@@ -74,6 +82,8 @@ FONT_SUBSCREEN = 2
 MOVE_PALETTES_OVERLAY, MOVE_PALETTES_AT = 11, 0x14C
 MOVE_PALETTE_NAMES = ["Normal", "None", "Dark", "Dragon", "Ice", "Psychic", "Electric", "Grass", "Water", "Fire",
                       "Mystery", "Steel", "Ghost", "Bug", "Rock", "Ground", "Poison", "Flying", "Fighting"]
+# The Pokédex's art (game/res/graphics/pokedex/pokedex.order), whose area map dex_map_art.py converts
+POKEDEX_ART = "resource/eng/zukan/zukan.narc"
 # The decomp's character map, beside this file's repo or in Anvil's
 CHARMAP = ROOT / "game/tools/msgenc/charmap.txt"
 
@@ -126,6 +136,13 @@ def nclr_colours(data: bytes) -> list:
     size, offset = struct.unpack_from("<II", block, 0x8)
     raw = block[offset:offset + size]
     return [struct.unpack_from("<H", raw, i * 2)[0] for i in range(len(raw) // 2)]
+
+
+def nscr_screen(data: bytes):
+    """An NSCR's screen: (width, height in pixels, its entries: each a u16 of tile, flips and palette row)."""
+    block = nitro_blocks(data)[b"NRCS"]
+    width, height, _, _, size = struct.unpack_from("<HHHHI", block, 0)
+    return width, height, list(struct.unpack_from(f"<{size // 2}H", block, 12))
 
 
 def rgb(colour: int) -> tuple:
@@ -260,11 +277,25 @@ class PlatinumRom:
     def palette(self, archive: str, member: int) -> list:
         return nclr_colours(unlz(self.narc(archive)[member]))
 
+    def screen(self, archive: str, member: int):
+        """An NSCR of an archive: (width, height, entries), nscr_screen's."""
+        return nscr_screen(unlz(self.narc(archive)[member]))
+
     def cursor(self) -> Image.Image:
         files = self.narc(BATTLE_SPRITES)
         cells, char_bytes, transfers = ncer_cells(unlz(files[CURSOR + 1]))
         width, height, pixels = draw_cells(ncgr_chars(unlz(files[CURSOR])), cells, char_bytes, transfers)
         return Image.frombytes("P", (width, height), pixels)
+
+    def type_icon(self, member: int) -> Image.Image:
+        width, height = TYPE_ICON_SIZE
+        chars = ncgr_chars(unlz(self.narc(BATTLE_SPRITES)[member]))
+        pixels = bytearray(width * height)
+        for i, byte in enumerate(chars[:width * height // 2]):
+            tile, at = divmod(i * 2, 64)
+            x, y = tile % (width // 8) * 8 + at % 8, tile // (width // 8) * 8 + at // 8
+            pixels[y * width + x], pixels[y * width + x + 1] = byte & 15, byte >> 4
+        return Image.frombytes("P", TYPE_ICON_SIZE, bytes(pixels))
 
     def font(self, member: int):
         """(the font's PNG, its glyphs' widths), as nitrogfx reads an NFGR: each glyph 16x16, four 8x8 tiles of 2
@@ -351,12 +382,24 @@ def check(rom: PlatinumRom, game: Path) -> int:
             == [(c & 31, c >> 5 & 31, c >> 10 & 31) for c in colours])
     png = Image.open(game / "res/graphics/battle/interface/cursor.png")
     differs("cursor.png", (png.size, png.tobytes()) == (rom.cursor().size, rom.cursor().tobytes()))
+    png = Image.open(game / "res/graphics/battle/type_icons/mystery.png")
+    icon = rom.type_icon(MYSTERY_ICON)
+    differs("type_icons/mystery.png", (png.size, png.tobytes()) == (icon.size, icon.tobytes()))
+    jasc = (game / "res/graphics/battle/type_icons/shared.pal").read_text().splitlines()[3:]
+    colours = rom.palette(BATTLE_SPRITES, TYPE_ICON_PALETTE)
+    differs("type_icons/shared.pal", [tuple(int(v) >> 3 for v in line.split()) for line in jasc[:len(colours)]]
+            == [(c & 31, c >> 5 & 31, c >> 10 & 31) for c in colours])
     import re
     text = (game / "src/overlay011/move_palettes.c").read_text(encoding="utf-8")
     source = {m[1]: [int(r) | int(g) << 5 | int(b) << 10
                      for r, g, b in re.findall(r"RGB\((\d+), (\d+), (\d+)\)", m[2])][:16]
               for m in re.finditer(r"sMovePalette(\w+)\[\] = \{(.*?)\};", text, re.S) if m[1] != "Table"}
     differs("move_palettes.c", source == rom.move_palettes())
+    # The Pokédex's area map and its hidden places' pieces (dex_map_art.py), as the decomp has the screens
+    for member, name in ((64, "area_map"), (65, "map_newmoon_island"), (66, "map_seabreak_path"),
+                         (67, "map_fullmoon_island"), (68, "map_spring_path")):
+        differs(f"{name}.NSCR", rom.screen(POKEDEX_ART, member)
+                == nscr_screen((game / f"res/graphics/pokedex/{name}.NSCR").read_bytes()))
     return bad
 
 

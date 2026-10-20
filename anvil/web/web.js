@@ -73,10 +73,10 @@
       place: async (file) => place(file),
       default_output: async () => outputName,
       pick_output: async (current) => current,
-      build: async (platinum, gen5) => {
+      build: async (platinum, gen5, out, hgss) => {
         chunks = [];
         rom = null;
-        call("build", { platinum, gen5 }).then((result) => {
+        call("build", { platinum, gen5, hgss }).then((result) => {
           if (result.error) return window.onError(result.error);
           window.onProgress("save", 0);
           rom = new Blob(chunks, { type: "application/octet-stream" });

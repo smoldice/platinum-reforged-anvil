@@ -34,14 +34,14 @@ function mount(file) {
   return `${dir}/${file.name}`;
 }
 
-function build({ platinum, gen5 }) {
+function build({ platinum, gen5, hgss }) {
   const write = (data) => {
     const bytes = data.toJs();
     data.destroy();
     postMessage({ type: "chunk", bytes }, [bytes.buffer]);
   };
   const progress = (step, fraction) => postMessage({ type: "progress", step, fraction });
-  return plain(web.build(platinum, gen5, write, progress));
+  return plain(web.build(platinum, gen5, write, progress, hgss || ""));
 }
 
 const handlers = {

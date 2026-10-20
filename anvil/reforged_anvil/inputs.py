@@ -13,21 +13,31 @@ SUPPORTED = {
     ("CPUE", 1): ("platinum", "rev1", "Pokémon Platinum (USA, Rev 1)"),
     ("IREO", None): ("gen5", "black2", "Pokémon Black Version 2 (USA, Europe)"),
     ("IRDO", None): ("gen5", "white2", "Pokémon White Version 2 (USA, Europe)"),
+    # Optional: the following Pokémon's art and texts (makers.py)
+    ("IPKE", None): ("hgss", "heartgold", "Pokémon HeartGold Version (USA)"),
+    ("IPGE", None): ("hgss", "soulsilver", "Pokémon SoulSilver Version (USA)"),
 }
 # Other games a player might pick by mistake, to say what the file is
 OTHERS = {
     "CPUP": "Pokémon Platinum (Europe)", "CPUJ": "Pokémon Platinum (Japan)", "CPUK": "Pokémon Platinum (Korea)",
     "CPUD": "Pokémon Platinum (Germany)", "CPUF": "Pokémon Platinum (France)", "CPUI": "Pokémon Platinum (Italy)",
     "CPUS": "Pokémon Platinum (Spain)", "ADAE": "Pokémon Diamond (USA)", "APAE": "Pokémon Pearl (USA)",
-    "IPKE": "Pokémon HeartGold (USA)", "IPGE": "Pokémon SoulSilver (USA)", "IRBO": "Pokémon Black (USA, Europe)",
+    "IPKP": "Pokémon HeartGold (Europe)", "IPGP": "Pokémon SoulSilver (Europe)", "IPKJ": "Pokémon HeartGold (Japan)",
+    "IPGJ": "Pokémon SoulSilver (Japan)", "IPKK": "Pokémon HeartGold (Korea)", "IPGK": "Pokémon SoulSilver (Korea)",
+    "IPKD": "Pokémon HeartGold (Germany)", "IPGD": "Pokémon SoulSilver (Germany)",
+    "IPKF": "Pokémon HeartGold (France)", "IPGF": "Pokémon SoulSilver (France)",
+    "IPKI": "Pokémon HeartGold (Italy)", "IPGI": "Pokémon SoulSilver (Italy)",
+    "IPKS": "Pokémon HeartGold (Spain)", "IPGS": "Pokémon SoulSilver (Spain)", "IRBO": "Pokémon Black (USA, Europe)",
     "IRAO": "Pokémon White (USA, Europe)", "IREJ": "Pokémon Black 2 (Japan)", "IRDJ": "Pokémon White 2 (Japan)",
     "IRED": "Pokémon Black 2 (Germany)", "IRDD": "Pokémon White 2 (Germany)", "IREF": "Pokémon Black 2 (France)",
     "IRDF": "Pokémon White 2 (France)", "IREI": "Pokémon Black 2 (Italy)", "IRDI": "Pokémon White 2 (Italy)",
     "IRES": "Pokémon Black 2 (Spain)", "IRDS": "Pokémon White 2 (Spain)", "IREK": "Pokémon Black 2 (Korea)",
     "IRDK": "Pokémon White 2 (Korea)",
 }
-INPUT_NAMES = {"platinum": "Pokémon Platinum (USA)", "gen5": "Pokémon Black 2 or White 2 (USA, Europe)"}
-WRONG_GAME = "Anvil needs the USA version of Platinum, and Black 2 or White 2 (USA, Europe)."
+INPUT_NAMES = {"platinum": "Pokémon Platinum (USA)", "gen5": "Pokémon Black 2 or White 2 (USA, Europe)",
+               "hgss": "Pokémon HeartGold or SoulSilver (USA)"}
+WRONG_GAME = ("Anvil needs the USA version of Platinum, Black 2 or White 2 (USA, Europe), and if you like HeartGold or "
+              "SoulSilver (USA).")
 # A file only Platinum Reforged has, to tell it from Platinum
 REFORGED_FILE = "gen5/ground.bin"
 
@@ -35,8 +45,8 @@ REFORGED_FILE = "gen5/ground.bin"
 @dataclass
 class RomInfo:
     path: str
-    input: str = ""     # "platinum" or "gen5", if supported
-    kind: str = ""      # "rev0", "rev1", "black2", "white2"
+    input: str = ""     # "platinum", "gen5" or "hgss", if supported
+    kind: str = ""      # "rev0", "rev1", "black2", "white2", "heartgold", "soulsilver"
     title: str = ""     # what the file is, for the player
     problem: str = ""   # why it can't be used, if it can't
 
@@ -101,7 +111,7 @@ def identify(path) -> RomInfo:
 
 
 def describe(path, slot: str, name: str = "") -> dict:
-    """What a ROM is, for a slot ("platinum" or "gen5"), as the app's page shows it. name: the file's, if not path's
+    """What a ROM is, for a slot ("platinum", "gen5" or "hgss"), as the app's page shows it. name: the file's, if not path's
     (a browser's file is named apart from where it's read)."""
     info = identify(path)
     problem = info.problem
@@ -112,7 +122,10 @@ def describe(path, slot: str, name: str = "") -> dict:
 
 
 def place(path, name: str = "") -> dict:
-    """A dropped ROM, in the slot its game belongs in (Platinum's unless it's a Black 2 or White 2)."""
+    """A dropped ROM, in the slot its game belongs in (Platinum's unless it's a Black 2 or White 2, or a HeartGold or
+    SoulSilver)."""
     info = identify(path)
-    slot = info.input or ("gen5" if info.title.startswith(("Pokémon Black", "Pokémon White")) else "platinum")
+    slot = info.input or ("gen5" if info.title.startswith(("Pokémon Black", "Pokémon White"))
+                          else "hgss" if info.title.startswith(("Pokémon HeartGold", "Pokémon SoulSilver"))
+                          else "platinum")
     return {"slot": slot, "info": describe(path, slot, name)}

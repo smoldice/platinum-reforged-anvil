@@ -11,11 +11,12 @@
     <div class="logo-wrap"><img class="logo" src="logo.png" alt="Platinum Reforged" draggable="false"></div>
     <div class="tag">Anvil</div>
     <p class="blurb">Builds Pokémon Platinum Reforged from your own copies of Pokémon Platinum and Pokémon Black&nbsp;2
-      or White&nbsp;2.</p>
+      or White&nbsp;2, and if you have one, HeartGold or SoulSilver for Pokémon that follow you.</p>
     <ol class="how">
       <li><span>1</span>Choose your Platinum ROM</li>
       <li><span>2</span>Choose your Black 2 or White 2 ROM</li>
-      <li><span>3</span>Build</li>
+      <li><span>3</span>Choose your HeartGold or SoulSilver ROM for following Pokémon (optional)</li>
+      <li><span>4</span>Reforge Platinum</li>
     </ol>
     <div class="version" id="version"></div>
   </aside>
@@ -45,23 +46,30 @@
         <button class="browse" data-slot="gen5">Choose…</button>
       </div>
 
+      <div class="slot optional" id="slot-hgss" data-slot="hgss">
+        <img class="cart" src="cart.png" alt="" draggable="false">
+        <div class="slot-body">
+          <div class="slot-title">Pokémon HeartGold or SoulSilver</div>
+          <div class="slot-hint"><span class="optional-tag">Optional</span> USA · For Pokémon that follow you</div>
+          <div class="slot-file"><span class="dot"></span><span class="file-title"></span><span class="file-name"></span></div>
+        </div>
+        <div class="slot-buttons">
+          <button class="browse" data-slot="hgss">Choose…</button>
+          <button class="browse small remove" data-slot="hgss" hidden>Remove</button>
+        </div>
+      </div>
+
       <div class="output">
         <div class="output-label">Save as</div>
         <div class="output-path" id="output-path">Choose your Platinum ROM first</div>
         <button class="browse small" id="change-output" disabled>Change…</button>
       </div>
 
-      <button class="build" id="build" disabled>Build Platinum Reforged</button>
+      <button class="build" id="build" disabled>Reforge Platinum</button>
     </section>
 
     <section id="progress" class="view" hidden>
-      <h1>Building…</h1>
-      <ul class="steps">
-        <li data-step="read"><span class="step-mark"></span>Reading your ROMs</li>
-        <li data-step="make"><span class="step-mark"></span>Making the sprites from your ROMs</li>
-        <li data-step="build"><span class="step-mark"></span>Building Platinum Reforged</li>
-        <li data-step="save"><span class="step-mark"></span>Saving and verifying</li>
-      </ul>
+      <p class="quip" id="quip" aria-live="polite"></p>
       <div class="bar"><div class="fill" id="bar-fill"></div></div>
       <div class="percent" id="percent">0%</div>
     </section>
@@ -74,7 +82,7 @@
       <p class="verified"><span>Verified</span></p>
       <div class="actions">
         <button class="build" id="show-folder">Show in folder</button>
-        <button class="browse" id="again">Build another</button>
+        <button class="browse" id="again">Reforge another</button>
       </div>
     </section>
 

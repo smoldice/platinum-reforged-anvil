@@ -34,17 +34,19 @@ class Result:
     size: int
 
 
-def make_into(platinum_path, gen5_path, write, progress=None, bundle=None) -> str:
-    """Makes the ROM into write(data), from its start (Bundle.build), after checking the two inputs; returns its SHA-1.
-    progress(step, fraction) is called as it goes; steps: "read", "make" (the sprites, made from the ROMs), "build".
-    The desktop programs write it to a file (make); Anvil in a browser to the download it offers."""
+def make_into(platinum_path, gen5_path, write, progress=None, bundle=None, hgss_path=None) -> str:
+    """Makes the ROM into write(data), from its start (Bundle.build), after checking the inputs; returns its SHA-1.
+    hgss_path: HeartGold or SoulSilver, optional, for the following Pokémon. progress(step, fraction) is called as it
+    goes; steps: "read", "make" (the sprites, made from the ROMs), "build". The desktop programs write it to a file
+    (make); Anvil in a browser to the download it offers."""
     def report(step, fraction):
         if progress:
             progress(step, fraction)
 
     report("read", 0.0)
     infos = {}
-    for expected, path in (("platinum", platinum_path), ("gen5", gen5_path)):
+    given = [("platinum", platinum_path), ("gen5", gen5_path)] + ([("hgss", hgss_path)] if hgss_path else [])
+    for expected, path in given:
         info = identify(path)
         if not info.ok:
             raise BuildError(f"{Path(path).name}: {info.title + ' — ' if info.title else ''}{info.problem}")
@@ -52,23 +54,29 @@ def make_into(platinum_path, gen5_path, write, progress=None, bundle=None) -> st
             raise BuildError(f"{Path(path).name} is {info.title}; this slot needs {INPUT_NAMES[expected]}.")
         infos[expected] = info
     bundle = bundle or Bundle(bundle_path())
+    for name, info in infos.items():
+        # A kind of game this release wasn't made for (one made without SoulSilver, say)
+        if info.kind not in bundle.manifest["inputs"].get(name, {}):
+            raise BuildError(f"{Path(info.path).name} is {info.title}, which this version of Anvil can't use.")
     inputs = Inputs(open_rom(platinum_path), infos["platinum"].kind, open_rom(gen5_path), infos["gen5"].kind)
+    if hgss_path:
+        inputs.hgss, inputs.hgss_variant = open_rom(hgss_path), infos["hgss"].kind
     report("read", 1.0)
     try:
         return bundle.build(inputs, write, lambda done, total: report("build", done / total),
                             lambda done, total: report("make", done / total))
     except InputMismatch as e:
-        which = {"platinum": infos["platinum"].title, "gen5": infos["gen5"].title}.get(e.rom)
+        which = {name: info.title for name, info in infos.items()}.get(e.rom)
         if not which:  # the bundle's own data: make_release.py checks every input with it, so not in a release
             raise
         raise BuildError(f"{which} doesn't match a clean copy of the game (it may be modified, or a bad dump).")
 
 
-def make(platinum_path, gen5_path, out_path, progress=None, bundle=None) -> Result:
+def make(platinum_path, gen5_path, out_path, progress=None, bundle=None, hgss_path=None) -> Result:
     """Makes the ROM at out_path, as make_into, then "save": it's written beside out_path as it's made, and moved
     there once it's checked."""
     out_path = Path(out_path)
-    for path in (platinum_path, gen5_path):
+    for path in filter(None, (platinum_path, gen5_path, hgss_path)):
         if _same_file(out_path, path):
             raise BuildError("You can't save over one of your ROMs. Choose another name.")
     tmp = out_path.with_suffix(out_path.suffix + ".part")
@@ -91,7 +99,7 @@ def make(platinum_path, gen5_path, out_path, progress=None, bundle=None) -> Resu
         raise cant_save(e)
     try:
         with f:
-            sha = make_into(platinum_path, gen5_path, f.write, progress, bundle)
+            sha = make_into(platinum_path, gen5_path, f.write, progress, bundle, hgss_path)
     except OSError as e:
         raise cant_save(e)
     except BaseException:

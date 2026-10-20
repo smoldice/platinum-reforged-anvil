@@ -1,8 +1,8 @@
 PLATINUM REFORGED ANVIL
 =======================
 
-Builds Pokemon Platinum Reforged from your own copies of two games. Your ROMs are only read, never changed: Anvil
-writes a new ROM, "Pokemon Platinum Reforged.nds".
+Builds Pokemon Platinum Reforged from your own copies of two games, or three. Your ROMs are only read, never
+changed: Anvil writes a new ROM, "Pokemon Platinum Reforged.nds".
 
 
 WHAT YOU NEED
@@ -11,8 +11,10 @@ WHAT YOU NEED
   1. Pokemon Platinum (USA), Rev 0 or Rev 1, as an .nds file.
   2. Pokemon Black Version 2 or Pokemon White Version 2 (USA, Europe), as an .nds file.
      The "NDSi Enhanced" dumps are fine.
+  3. If you like, Pokemon HeartGold Version or Pokemon SoulSilver Version (USA), as an .nds file: with it, your
+     first Pokemon follows you around, as in HeartGold and SoulSilver. Without it, the game is the same but for that.
 
-Both must be clean, unmodified dumps of your own cartridges. Dumps with the secure area encrypted or decrypted
+All must be clean, unmodified dumps of your own cartridges. Dumps with the secure area encrypted or decrypted
 both work, and so do trimmed dumps. Other regions and other games aren't supported (Anvil says so if you
 pick one).
 
@@ -25,8 +27,8 @@ HOW TO BUILD
 
   1. Open "Platinum Reforged Anvil.exe" (on Linux, see COMMAND LINE).
   2. Choose your Platinum ROM, and your Black 2 or White 2 ROM: click Choose..., or drop both files onto the
-     window (it puts each one where it belongs).
-  3. Click "Build Platinum Reforged".
+     window (it puts each one where it belongs). If you like, choose your HeartGold or SoulSilver ROM too.
+  3. Click "Reforge Platinum".
 
 Or build it in your browser, with nothing to install: https://smoldice.github.io/platinum-reforged-anvil/build/
 (about a minute; your ROMs stay on your computer).
@@ -46,8 +48,9 @@ In a terminal, in Anvil's folder:
 
   platinum-reforged-anvil --platinum "Platinum.nds" --black2 "Black 2.nds" --out "Platinum Reforged.nds"
 
-(--white2 works the same as --black2. --out is optional: the new ROM goes beside your Platinum ROM. On Linux, start
-it as ./platinum-reforged-anvil.)
+(--white2 works the same as --black2. --out is optional: the new ROM goes beside your Platinum ROM. Add
+--heartgold "HeartGold.nds", or --soulsilver, for the following Pokemon. On Linux, start it as
+./platinum-reforged-anvil.)
 
   platinum-reforged-anvil --identify "some rom.nds"     says what a ROM is, and whether Anvil takes it
 

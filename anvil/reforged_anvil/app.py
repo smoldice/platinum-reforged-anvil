@@ -39,14 +39,14 @@ class Api:
                 "inputs": INPUT_NAMES}
 
     def describe(self, path, slot):
-        """What a ROM is, for a slot ("platinum" or "gen5")."""
+        """What a ROM is, for a slot ("platinum", "gen5" or "hgss")."""
         if not path:
             return None
         self._last_folder = str(Path(path).parent)
         return describe(path, slot)
 
     def place(self, path):
-        """A dropped ROM, in the slot its game belongs in (Platinum's unless it's a Black 2 or White 2)."""
+        """A dropped ROM, in the slot its game belongs in (inputs.place)."""
         self._last_folder = str(Path(path).parent)
         return place(path)
 
@@ -69,14 +69,15 @@ class Api:
         path = result if isinstance(result, str) else result[0]
         return path if path.lower().endswith(".nds") else path + ".nds"
 
-    def build(self, platinum, gen5, out):
+    def build(self, platinum, gen5, out, hgss=""):
+        """hgss: HeartGold or SoulSilver, or "" for none."""
         if self._busy:
             return False
         self._busy = True
-        threading.Thread(target=self._build, args=(platinum, gen5, out), daemon=True).start()
+        threading.Thread(target=self._build, args=(platinum, gen5, out, hgss), daemon=True).start()
         return True
 
-    def _build(self, platinum, gen5, out):
+    def _build(self, platinum, gen5, out, hgss):
         shown = {"key": None}
 
         def progress(step, fraction):
@@ -86,7 +87,7 @@ class Api:
                 self._js("onProgress", step, fraction)
 
         try:
-            result = make(platinum, gen5, out, progress)
+            result = make(platinum, gen5, out, progress, hgss_path=hgss or None)
             self._js("onDone", {"path": result.path, "name": Path(result.path).name, "sha1": result.sha1})
         except BuildError as e:
             self._js("onError", str(e))

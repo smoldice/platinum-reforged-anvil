@@ -44,6 +44,7 @@ body.web .output { grid-template-columns: auto 1fr; }
   body.web .slot { grid-template-columns: 44px 1fr; gap: 12px; padding: 14px; }
   body.web .slot .cart { width: 44px; }
   body.web .slot .browse { grid-column: 1 / -1; padding: 11px 16px; }
+  body.web .slot .slot-buttons { grid-column: 1 / -1; }
   body.web .output-path { white-space: normal; overflow-wrap: anywhere; direction: ltr; }
   body.web .actions { flex-direction: column; align-self: stretch; }
   body.web .error-text { max-width: none; }

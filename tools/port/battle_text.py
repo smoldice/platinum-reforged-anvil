@@ -8,6 +8,11 @@ player's client (btl_string.c, btl_client.c). So "Player" becomes a trainer name
 the message leaves unused. A trainer class tag ({010e:N}) uses its trainer's argument again, which shifts the tags
 after it back by one; N counts that in.
 
+The EXPERIENCE option's MODERN has one message Black 2 doesn't, for the experience the rest of the team gets
+(gen5_experience.c). It goes after the bank's own, as message REST_OF_TEAM. The LEVEL CAPS option's line for a Pokémon
+the cap keeps from gaining experience follows it, as message LEVEL_CAP, with the Pokémon's name as Black 2's "… gained
+… Exp. Points!" has it.
+
 The messages are in Black 2's system text, a/0/0/2, file BANK: each one encrypted with a key that starts at
 0x7c89 + 0x2983 times its index and rotates by 3 bits per character (pokebw2: tools/text/text_data.py).
 """
@@ -20,6 +25,16 @@ LINE_END = 0xFFFF
 TRAINER_NAME = 0x0100
 TRAINER_CLASS = 0x010E
 WORD = "Player"
+LINE_BREAK = 0xFFFE
+# The message the rest of the team's experience shows (G5_MSG_REST_OF_TEAM_EXP in gen5_experience.c), after Black 2's
+# 201 messages
+REST_OF_TEAM = 201
+REST_OF_TEAM_TEXT = "The rest of your team gained\nExp. Points!"
+# The level cap's line (G5_MSG_LEVEL_CAP in gen5_experience.c): the name of the Pokémon of the message's first argument
+# (a party nickname tag, as Black 2's message 42 has), then the text
+LEVEL_CAP = 202
+POKEMON_NICKNAME = 0x010C
+LEVEL_CAP_TEXT = " can't gain more\nExp. Points!"
 
 
 def decrypt(chars):
@@ -38,6 +53,11 @@ def encrypt(chars, index):
         out.append(c ^ key)
         key = ((key << 3) | (key >> 13)) & 0xFFFF
     return out
+
+
+def text(string):
+    """A message's characters, with its line breaks and its end."""
+    return [LINE_BREAK if c == "\n" else ord(c) for c in string] + [LINE_END]
 
 
 def tags(chars):
@@ -71,7 +91,7 @@ def patch(data: bytes):
     """The message file with the changed messages, and how many changed."""
     sections, count = struct.unpack_from("<HH", data, 0)
     section = struct.unpack_from("<I", data, 12)[0]
-    assert sections == 1
+    assert sections == 1 and count == REST_OF_TEAM
     messages, changed = [], 0
     for i in range(count):
         offset, length, attribute = struct.unpack_from("<IHH", data, section + 4 + 8 * i)
@@ -82,6 +102,11 @@ def patch(data: bytes):
             changed += 1
         messages.append((encrypt(chars, i) if new is not None else
                          list(struct.unpack_from(f"<{length}H", data, section + offset)), attribute))
+    rest = text(REST_OF_TEAM_TEXT)
+    messages.append((encrypt(rest, REST_OF_TEAM), 0))
+    capped = [CONTROL, POKEMON_NICKNAME, 1, 0] + text(LEVEL_CAP_TEXT)
+    messages.append((encrypt(capped, LEVEL_CAP), 0))
+    count += 2
     table = b""
     body = b""
     offset = 4 + 8 * count

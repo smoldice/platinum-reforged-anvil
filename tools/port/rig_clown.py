@@ -127,7 +127,7 @@ def split(src):
     return parts
 
 
-def touch_up(part, degrees, image):
+def touch_up(part, degrees, image, source=None):
     """A turned sleeve, its outline put back along its free edges (the edges where it joins his body and its cuff
     stay as they are)."""
     return outline(image, FREE_EDGES[part], PIVOTS[part], degrees) if part in FREE_EDGES else image

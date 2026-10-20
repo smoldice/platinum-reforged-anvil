@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""The battle's Touch Screen menus with Platinum's own art, for the BATTLE MENUS option at PLATINUM (the user's,
-2026-10-11): copies of the archives Black 2's lower screen loads from (11: the command, move, target, yes/no and
+"""The battle's Touch Screen menus with Platinum's own art (the user's, 2026-10-11; always since GAME-141,
+2026-10-18): copies of the archives Black 2's lower screen loads from (11: the command, move, target, yes/no and
 message screens; 49: the status bar; 98: the bag; 99: the party list) whose maps, characters and palettes show
 Platinum's art where Black 2's was. Black 2's code stays: what each button does, the touch areas, and its transitions,
-which now move Platinum's pieces. gen5_runtime.c points Black 2's archive paths at these copies (ptui/a/0/1/1 …) when
-the option asks; gen5_battle.c and gen5_runtime.c patch what data can't change (the dimming of the background, where
-the party balls go, which text is dark).
+which now move Platinum's pieces. gen5_runtime.c points Black 2's archive paths at these copies (ptui/a/0/1/1 …);
+gen5_battle.c and gen5_runtime.c patch what data can't change (the dimming of the background, where the party balls
+go, which text is dark).
 
 How Black 2 draws its lower screen (pokebw2 src/ov168/btlv_input.c; the sub screen's BGs as GFL numbers them):
 - BG 5 (sub BG1), the large area: maps 0x174-0x17b, 512x512, a screen to each quarter: top left the command screen's
@@ -44,6 +44,7 @@ import nitro
 
 import lower_screen_sets
 import make_trainer_sprites as mts
+import mystery_type
 from platinum_rom import BATTLE_SPRITES, FONT_SUBSCREEN, INTERFACE_PALETTE, PlatinumRom
 
 ARCHIVES = (11, 49, 98, 99)
@@ -113,8 +114,11 @@ PANELS = {0x174: MOVE_PANELS, 0x17B: MOVE_PANELS,
           # FIGHT's and RUN's rows, which don't change
           0x177: {2: (PT_YES_NO, 1, 1), 3: (PT_YES_NO, 4, 4)}}
 # The move tiles' palettes, loaded by type (Black 2's order, without Platinum's ???) from these files, and for no
-# move from NO_MOVE; the target panels' (481 the opponents', 482 the partners'), Platinum's rows of them
+# move from NO_MOVE; the target panels' (481 the opponents', 482 the partners'), Platinum's rows of them. Platinum's
+# ???, the battle's type 17, has the file mystery_type.py adds after the lower screen sets (MYSTERY_TILE), which the
+# move screen loads whichever set the battle has
 B2_TYPE_PALETTES = (464, 470, 473, 471, 472, 476, 475, 477, 479, 465, 466, 468, 467, 469, 478, 474, 480)
+MYSTERY_TILE = mystery_type.TILE_PALETTE_MEMBER
 NO_MOVE_PALETTES = (463,)
 TARGET_PALETTES = {481: 5, 482: 6}
 # The opponents' panels' rows, which hold 0x168's own colours for the frames before Black 2 loads 481 into them
@@ -165,7 +169,7 @@ CURSOR_ROWS, CURSOR_COLOURS = (0, 4), {14: 0x7FFF, 15: 0x001F}
 # charcode - 1) have a body (1), its shading (2) and an outline (3); Black 2 draws a glyph's 1 as the letter and 2 as
 # the shadow, and 3 not at all, so the body and shading become 1 and the outline 2, closed all round (label_outlined).
 # Characters by the decomp's charmap (PlatinumRom.charmap)
-LABEL_FONT_MEMBER = 1214
+LABEL_FONT_MEMBER = mystery_type.TILE_PALETTE_MEMBER + 1
 LABEL_CELL_WIDTH, LABEL_CELL_HEIGHT = 12, 15
 LABEL_GLYPH_VALUES = {0: 0, 1: 1, 2: 1, 3: 2}
 LABEL_CHAR_ALIASES = {"'": "’"}
@@ -571,13 +575,18 @@ def skin_set(files: list, offset: int, pt: Platinum, background: list, buttons: 
                         [(f, [EMPTY_BODY.get(i, c) for i, c in enumerate(pt.move_palette["None"])])
                          for f in NO_MOVE_PALETTES] + \
                         [(f, pt.rows[r]) for f, r in TARGET_PALETTES.items()]:
-        d, lz = unpack(files[fid + offset])
-        b = palette_base(d)
-        assert len(colours) == 16, (fid, len(colours))
-        for i, colour in enumerate(colours):
-            struct.pack_into("<H", d, b + i * 2, colour)
-        files[fid + offset] = pack(d, lz)
+        write_palette(files, fid + offset, colours)
     return len(encoder.tiles)
+
+
+def write_palette(files: list, fid: int, colours: list):
+    """A palette file's first 16 colours."""
+    d, lz = unpack(files[fid])
+    b = palette_base(d)
+    assert len(colours) == 16, (fid, len(colours))
+    for i, colour in enumerate(colours):
+        struct.pack_into("<H", d, b + i * 2, colour)
+    files[fid] = pack(d, lz)
 
 
 # --- The bag (archive 98) ---
@@ -617,14 +626,18 @@ BAG_PAGE_ROW = 0
 # disabled button in
 BAG_PRESSED = {"big": ((16, 0, 16, 6), (16, 6, 16, 6)), "small": ((0, 57, 5, 5), (5, 57, 5, 5))}
 PT_DISABLED_ROW = 5
-# The quantiser keeps the pocket icons' colours before the buttons' shading
-ICON_WEIGHT = 16
-# Black 2 prints a pocket's name higher than Platinum (from its 4th row of cells; gen5_runtime.c brings it down 2
-# pixels, or 4 for one line), so the icon goes between the button's inside top and the name's first pixel row, in the
-# middle (the user's), in the button's pixels by member: above a name of two lines, smaller to fit
-ICON_TOP = 5
-POCKET_NAME_TOP = {5: 28, 6: 28, 7: 36, 8: 36}
-ICON_SCALE = {5: 0.75, 6: 0.75, 7: 1, 8: 1}
+# The quantiser keeps the pocket icons' colours before the buttons' shading, each icon pixel counted this many times.
+# The pockets' and the items' buttons have 19 colours for 15 places: at full size (GAME-90), 8 merges the shades of
+# HP/PP RESTORE's, STATUS RESTORE's and BATTLE ITEMS' icons into one, as when the two-line pockets' icons were smaller;
+# 16 would keep HP/PP RESTORE's and give the pockets' top edge the items' yellow
+ICON_WEIGHT = 8
+# The pocket icons at full size, between the button's inside top and the name, in the middle (the user's). Black 2
+# prints a pocket's name higher than Platinum (from its 4th row of cells; gen5_runtime.c brings it down 3 pixels for two
+# lines, 4 for one) and its buttons are a row of cells shorter (the middle row left out), so Platinum's icon stays where
+# its art has it above a name of one line, and above a name of two lines, which starts at the button's pixel row 30,
+# goes up by these pixels, by member: to rows 9 to 26, two rows of the inside (from row 7) above it, three below
+# (GAME-90)
+ICON_RAISE = {5: 1, 6: 1}
 # The pocket icons' palette row; its colours that are also the pocket's are the pocket's, which brighten when pressed
 PT_ICON_ROW = 6
 # Platinum's buttons on its pages (battle_bag_buttons.c sButtonDimensions: column, row, width, height), which Black 2's
@@ -693,28 +706,15 @@ def skin_bag(files: list, bag: PlatinumBag):
         px, row = cell_
         return tuple((row, i) for i in px)
 
-    def place_icon(art, body, name_top, scale):
-        """The icon (its cells' pixels that aren't the button's body) scaled and moved between ICON_TOP and
-        name_top; the body where it was."""
+    def raise_icon(art, body, by):
+        """The icon (its cells' pixels that aren't the button's body) moved up by pixels; the body where it was."""
         grid = [[art[y // 8][x // 8][(y % 8) * 8 + x % 8] for x in range(len(art[0]) * 8)] for y in range(len(art) * 8)]
         icon = {(y, x): pixel for y, line in enumerate(grid) for x, pixel in enumerate(line)
                 if pixel[0] == PT_ICON_ROW and pixel[1] not in (0, body)}
-        y0, y1 = min(y for y, _ in icon), max(y for y, _ in icon)
-        x0, x1 = min(x for _, x in icon), max(x for _, x in icon)
-        height, width = round((y1 - y0 + 1) * scale), round((x1 - x0 + 1) * scale)
         for y, x in icon:
             grid[y][x] = (0, body)
-        top = ICON_TOP + (name_top - ICON_TOP - height) // 2
-        left = (x0 + x1 + 1) // 2 - width // 2
-        # Each new pixel the colour most of its part of the old icon has, or none where less than half has one
-        samples = [(k + 0.5) / 3 for k in range(3)]
-        for ty in range(height):
-            for tx in range(width):
-                seen = [icon.get((y0 + int((ty + a) / scale), x0 + int((tx + b) / scale)))
-                        for a in samples for b in samples]
-                found = [pixel for pixel in seen if pixel]
-                if len(found) * 2 >= len(seen):
-                    grid[top + ty][left + tx] = Counter(found).most_common(1)[0][0]
+        for (y, x), pixel in icon.items():
+            grid[y - by][x] = pixel
         return [[tuple(grid[r * 8 + k // 8][c * 8 + k % 8] for k in range(64)) for c in range(len(art[0]))]
                 for r in range(len(art))]
 
@@ -730,8 +730,8 @@ def skin_bag(files: list, bag: PlatinumBag):
                 for c, cell_ in enumerate(line):
                     art[r][(w - 4) // 2 + c] = cell_
         art = [[lift(art[r][c]) for c in middle(w, tw)] for r in middle(h, th)]
-        if icon:
-            art = place_icon(art, bag.body(x, y, w, h), POCKET_NAME_TOP[member], ICON_SCALE[member])
+        if member in ICON_RAISE:
+            art = raise_icon(art, bag.body(x, y, w, h), ICON_RAISE[member])
         frames[member] = (d, lz, tw, th, art, group)
 
     page = [row[:] for row in bag.maps[PT_BAG_PAGES]]
@@ -1096,4 +1096,5 @@ def build(arc: int, data: bytes, platinum: PlatinumRom) -> bytes:
             skin_set(narc.files, lower_screen_sets.set_offset(k), pt, background,
                      command_buttons(pt, words, removed), removed, cancel=cancel,
                      back=command_buttons(pt, {**words, "RUN": "CANCEL"}, removed))
+        write_palette(narc.files, MYSTERY_TILE, pt.move_palette["Mystery"])
     return narc.save()

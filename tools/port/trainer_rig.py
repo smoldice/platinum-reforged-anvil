@@ -13,9 +13,14 @@ A rig is a module with:
   TICKS, STEP    the animation's length and its key spacing, in ticks (MCSS advances one tick per update)
   ORDER          the parts, back to front
   PIVOTS         {part: (x, y)} in the frame: where each part turns, and where its node sits
-  split(src)     {part: indexed 80x80 image}: the parts, with what moving parts uncover painted in
-  key(part, t)   (degrees, dx, dy): the part's turn (clockwise on screen) and shift at tick t
-  touch_up(part, degrees, image)   (optional) the turned part's image, touched up: called for every angle but 0
+  split(src)     {part: indexed 80x80 image}: the parts, with what moving parts uncover painted in. src is
+                 Platinum's picture: its still frame, with its intro frames below it for the classes that have them
+  key(part, t)   (degrees, dx, dy): the part's turn (clockwise on screen) and shift at tick t; or (degrees, dx, dy,
+                 image) to draw another of split()'s images for the part (a blink, a hand in another pose), which may
+                 be empty to hide it
+  touch_up(part, degrees, image, source)   (optional) the turned part's image, touched up: called for every angle but
+                 0, with source the part's image unturned (split()'s)
+The rigs made in Aseprite are data for anim_rig.py (anim_<class>.py, packed by aseprite_rig.py).
 The still frame (the second multi-cell animation, which Black 2 shows when the trainer comes back after the battle)
 is Platinum's frame itself, and the animation must end on it; or, for a rig with STILL_IS_END = True, it's the
 animation's last frame, whatever that is.
@@ -145,39 +150,43 @@ def srt(index, px=0, py=0):
 def build(rig, src, template, still_frame=None):
     """The 8 files of the sprite. src is Platinum's front.png (indexed, 80x80); template the 8 files of the Black 2
     sprite whose headers the new files take (make_trainer_sprites.FRONT_TEMPLATE's). The still frame is Platinum's,
-    or the animation's last for a rig with STILL_IS_END (drawn from a first build)."""
+    or the animation's last for a rig with STILL_IS_END (drawn from a first build). src may have intro frames below
+    its still frame, as Platinum's picture of a class with an intro does: the rig may take parts from them."""
+    still_src = src.crop((0, 0, mts.FRAME, mts.FRAME)) if src.size != (mts.FRAME, mts.FRAME) else src
     if still_frame is None and getattr(rig, "STILL_IS_END", False):
-        first = read(build(rig, src, template, src))
-        return build(rig, src, template, frame(first, rig.TICKS - 1, size=src.size, origin=rig.ORIGIN))
+        first = read(build(rig, src, template, still_src))
+        return build(rig, src, template, frame(first, rig.TICKS - 1, size=still_src.size, origin=rig.ORIGIN))
     parts = rig.split(src)
     images, pivots = {}, {}
 
-    def cell(part, degrees):
-        name = (part, degrees)
+    def cell(part, image, degrees):
+        name = (image, degrees)
         if name not in images:
             if degrees == 0:
-                images[name], pivots[name] = parts[part], rig.PIVOTS[part]
+                images[name], pivots[name] = parts[image], rig.PIVOTS[part]
             else:
-                images[name] = rotsprite(parts[part], rig.PIVOTS[part], degrees)
+                images[name] = rotsprite(parts[image], rig.PIVOTS[part], degrees)
                 pivots[name] = (rig.PIVOTS[part][0] + MARGIN, rig.PIVOTS[part][1] + MARGIN)
                 # a rig may touch up its turned parts (the Clown's sleeves get their outline back)
                 if hasattr(rig, "touch_up"):
-                    images[name] = rig.touch_up(part, degrees, images[name])
+                    images[name] = rig.touch_up(part, degrees, images[name], parts[image])
         return name
 
     tracks = {}
     for part in rig.ORDER:
         tracks[part] = []
         for t in range(0, rig.TICKS, rig.STEP):
-            degrees, dx, dy = rig.key(part, t)
+            degrees, dx, dy, *image = rig.key(part, t)
             degrees = round(degrees, 1) + 0.0
-            tracks[part].append((cell(part, degrees if degrees else 0.0), int(round(dx)), int(round(dy))))
+            tracks[part].append((cell(part, image[0] if image else part, degrees if degrees else 0.0),
+                                 int(round(dx)), int(round(dy))))
     still = ("still", 0.0)
-    images[still], pivots[still] = still_frame or src, rig.ORIGIN
+    images[still], pivots[still] = still_frame or still_src, rig.ORIGIN
     names = list(images)
 
-    # The texture: each cell's opaque box, shelf-packed
-    boxes = {n: images[n].point(lambda v: 255 if v else 0).getbbox() for n in names}
+    # The texture: each cell's opaque box, shelf-packed. An empty one (a part hidden on some steps) draws one clear
+    # pixel
+    boxes = {n: images[n].point(lambda v: 255 if v else 0).getbbox() or (0, 0, 1, 1) for n in names}
     placed = mts.pack([(n, b[2] - b[0], b[3] - b[1]) for n, b in boxes.items()])
     assert placed, "the parts don't fit the texture"
     tex = Image.new("P", (mts.TEX_W, mts.TEX_H), 0)
@@ -374,7 +383,8 @@ def main():
     if getattr(rig, "STILL_IS_END", False):
         print(f"{len(sprite['rects'])} cells; the still frame is the animation's last")
     else:
-        assert end.tobytes() == src.tobytes(), "the animation doesn't end on Platinum's frame"
+        assert end.tobytes() == src.crop((0, 0, mts.FRAME, mts.FRAME)).tobytes(), \
+            "the animation doesn't end on Platinum's frame"
         print(f"{len(sprite['rects'])} cells; the last frame and the still frame are Platinum's")
 
     frames = []

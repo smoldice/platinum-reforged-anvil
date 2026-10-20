@@ -21,10 +21,11 @@ def place_file(path: str, name: str) -> dict:
     return place(path, name)
 
 
-def build(platinum: str, gen5: str, write, progress) -> dict:
-    """{"sha1": ...} once the ROM is made and checked, or {"error": the message the app would show}."""
+def build(platinum: str, gen5: str, write, progress, hgss: str = "") -> dict:
+    """{"sha1": ...} once the ROM is made and checked, or {"error": the message the app would show}. hgss: HeartGold
+    or SoulSilver, or "" for none."""
     try:
-        return {"sha1": make_into(platinum, gen5, write, progress)}
+        return {"sha1": make_into(platinum, gen5, write, progress, hgss_path=hgss or None)}
     except BuildError as e:
         return {"error": str(e)}
     except Exception as e:  # anything unexpected, shown rather than lost, as the app does
