@@ -122,6 +122,12 @@ class Rom:
     def file_by_path(self, path: str) -> bytes:
         return self.file(self.paths[path])
 
+    def file_part(self, path: str, start: int, end: int) -> bytes:
+        """file_by_path(path)[start:end], reading only that part of the ROM."""
+        file_start, file_end = self.fat[self.paths[path]]
+        start, end, _ = slice(start, end).indices(file_end - file_start)
+        return bytes(self.data[file_start + start:file_start + max(start, end)])
+
     def _file_names(self) -> dict:
         """{path: file id} from the file name table."""
         fnt = self.fnt()

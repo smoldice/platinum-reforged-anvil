@@ -58,11 +58,12 @@ def resolve(rom: Rom, ref: str) -> bytes:
     kind, _, arg = ref.partition(":")
     if kind == "file":
         path, _, span = arg.partition("@")
-        data = rom.file_by_path(path)
         if span:
+            # Only the slice is read: a base can be a thousand slices of one large file (Gen V's sound data, of
+            # Black 2's 85 MB), and in a browser every read of the whole file goes through the player's file
             start, end = (int(x) for x in span.split(":"))
-            data = data[start:end]
-        return data
+            return rom.file_part(path, start, end)
+        return rom.file_by_path(path)
     if kind == "overlay":
         return rom.overlay(int(arg))
     if kind == "gen5code":
