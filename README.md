@@ -262,7 +262,8 @@ Anvil is open source, under the MIT License. [Its source](../../) is on GitHub. 
 Platinum Reforged is built on the work of the Pokémon decompilation community:
 
 - [pret/pokeplatinum](https://github.com/pret/pokeplatinum), the Pokémon Platinum decompilation.
-- [pret/pokeheartgold](https://github.com/pret/pokeheartgold), the Pokémon HeartGold and SoulSilver decompilation.
+- [pokeheartgold](https://github.com/ctrl-cheeb-del/pokeheartgold), the Pokémon HeartGold and SoulSilver decompilation,
+  built on [pret/pokeheartgold](https://github.com/pret/pokeheartgold).
 - [pokebw2](https://github.com/fuddlesworth/pokebw2), the Pokémon Black 2 and White 2 decompilation.
 
 The Pokédex's maps of Sinnoh are based on a map from [Bulbapedia](https://bulbapedia.bulbagarden.net/).
