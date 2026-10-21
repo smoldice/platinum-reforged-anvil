@@ -1,6 +1,6 @@
 > [!IMPORTANT]
-> **Platinum Reforged is moving to Hackdex.** From now on, new releases will be submitted to Hackdex as patches
-> instead of coming out here. The releases and the web builder on this page stay up, but they won't get updates.
+> **Platinum Reforged is moving to Hackdex.** From now on, new releases will be submitted to Hackdex as patches.
+> Each one will still be posted under [Releases](../../releases) here, with a link to its Hackdex page.
 
 <div align="center">
 
