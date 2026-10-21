@@ -1,3 +1,7 @@
+> [!IMPORTANT]
+> **Platinum Reforged is moving to Hackdex.** From now on, new releases will be submitted to Hackdex as patches
+> instead of coming out here. The releases and the web builder on this page stay up, but they won't get updates.
+
 <div align="center">
 
 <img src="assets/wordmark.png" alt="Platinum Reforged" width="560">
