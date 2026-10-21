@@ -131,7 +131,7 @@ def program(kind: str, name: str, work: Path, dist: Path) -> Path:
     args += [x for m in EXCLUDES for x in ("--exclude-module", m)]
     args += [x for m in HIDDEN_IMPORTS for x in ("--hidden-import", m)]
     if not LINUX:
-        # Windows wants four numbers: a pre-release's (1.0.0-alpha) are its release's
+        # Windows wants four numbers: a pre-release's (0.2.0-alpha) are its release's
         numbers = [int(x) for x in re.match(r"[\d.]+", __version__)[0].strip(".").split(".")] + [0] * 4
         version_file = work / f"version_{kind}.txt"
         version_file.write_text(VERSION_INFO.format(

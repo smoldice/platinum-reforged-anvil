@@ -195,7 +195,7 @@ function mockApi() {
       title: "Pokémon HeartGold Version (USA)", ok: true, problem: "" },
   };
   return {
-    info: async () => ({ version: "1.0.0", label: "preview" }),
+    info: async () => ({ version: "0.2.0-alpha", label: "preview" }),
     pick_rom: async (slot) => roms[slot],
     place: async () => ({ slot: "platinum", info: roms.platinum }),
     default_output: async () => "C:\\ROMs\\Pokemon Platinum Reforged.nds",
