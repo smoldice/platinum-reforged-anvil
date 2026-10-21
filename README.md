@@ -9,10 +9,10 @@
 
 **Pokémon Platinum with BW2's battle engine.**<br>
 
-[![Play now in the web builder](https://img.shields.io/badge/Play_now-Web_builder-B00F16?style=for-the-badge&logo=webassembly&logoColor=white)](https://smoldice.github.io/platinum-reforged-anvil/build/)
+[![Get it on Hackdex](https://img.shields.io/badge/Get_it_on-Hackdex-B00F16?style=for-the-badge)](https://www.hackdex.app/hack/pokemon-platinum-reforged)
 [![Buy me a coffee on Ko-fi](https://img.shields.io/badge/Ko--fi-Buy_me_a_coffee-FF5E5B?style=for-the-badge&logo=kofi&logoColor=white)](https://ko-fi.com/smoldice)
 
-[**Download**](../../releases/latest) · [Setup](#setup) · [Options](#in-game-options) · [Troubleshooting](#troubleshooting) · [Report a problem](../../issues)
+[How to play](#how-to-play) · [Options](#in-game-options) · [Troubleshooting](#troubleshooting) · [Report a problem](../../issues)
 
 </div>
 
@@ -23,11 +23,6 @@
 Platinum Reforged is a ROM hack of Pokémon Platinum that brings in Black 2 and White 2's battle engine, and
 more of Gen V along with it. The goal of this romhack is to create a Platinum experience in Gen V's more modern
 graphics.
-
-This is the home of **Platinum Reforged Anvil**, the tool that builds the game.
-Anvil takes your own Platinum and Black 2 or White 2 (and, if you want your Pokémon to follow you, HeartGold or
-SoulSilver) and writes a new ROM, *Pokemon Platinum Reforged.nds*. It runs
-[in your browser](https://smoldice.github.io/platinum-reforged-anvil/build/) or as a program for Windows and Linux.
 
 ## New in 0.2.0
 
@@ -152,115 +147,25 @@ you like. You can change any of them at any time.
 - More custom trainer sprites.
 - More to come!
 
-## What you need
+## How to play
 
-1. **Pokémon Platinum (USA)**, Rev 0 or Rev 1, as an `.nds` file (game code `CPUE`).
-2. **Pokémon Black Version 2** or **Pokémon White Version 2** (USA, Europe), as an `.nds` file (game codes `IREO` and
-   `IRDO`). "NDSi Enhanced" dumps are fine.
-3. *Optional:* **Pokémon HeartGold** or **Pokémon SoulSilver (USA)**, as an `.nds` file (game codes `IPKE` and
-   `IPGE`), for the following Pokémon.
-4. A recent web browser, or **Windows 10 or 11**, or **Linux**.
-
-The ROMs must be clean, unmodified dumps of your own cartridges. Trimmed dumps work.
-
-> **Why so many games?** Every Gen V piece of Platinum Reforged (the engine, sprites, backgrounds, music) comes from
-> Black 2 or White 2, and the following Pokémon (their sprites and what they say) come from HeartGold or SoulSilver.
-
-## Setup
-
-### In your browser
-
-1. Open [Anvil in your browser](https://smoldice.github.io/platinum-reforged-anvil/build/).
-2. Choose your Platinum ROM and your Black 2 or White 2 ROM, and your HeartGold or SoulSilver ROM if you want the
-   following Pokémon: click **Choose...**, or drop the files onto the page.
-3. Click **Reforge Platinum**, then **Save the ROM**.
-
-Your ROMs never leave your computer: the page builds the game there. The first time, your browser downloads
-about 15 MB to run Anvil, and a build takes about a minute.
-
-### Windows
-
-1. Download **`Platinum-Reforged-Anvil-<version>-Windows.zip`** from the [latest release](../../releases/latest)
-   and unzip it.
-2. Open **`Platinum Reforged Anvil.exe`**.
-3. Choose your Platinum ROM and your Black 2 or White 2 ROM, and your HeartGold or SoulSilver ROM if you want the
-   following Pokémon: click **Choose...**, or drop the files onto the window and Anvil puts each one in its slot.
-4. Click **Reforge Platinum**.
-
-> Windows may say *"Windows protected your PC"* the first time, because Anvil isn't signed. Click **More info**,
-> then **Run anyway**.
-
-### Linux
-
-On Linux, Anvil is a command-line program. Download **`Platinum-Reforged-Anvil-<version>-Linux.tar.gz`** from
-the [latest release](../../releases/latest), then in a terminal, in the folder you saved it to:
-
-```sh
-tar -xzf Platinum-Reforged-Anvil-<version>-Linux.tar.gz
-cd "Platinum Reforged Anvil <version>"
-./platinum-reforged-anvil --platinum "Platinum.nds" --black2 "Black 2.nds" --heartgold "HeartGold.nds"
-```
-
-### Command line (both)
-
-The same build without the window. On Windows, it's **`platinum-reforged-anvil.exe`**, in the same zip as the app.
-On Linux, it's the program above.
-
-```sh
-platinum-reforged-anvil --platinum "Platinum.nds" --black2 "Black 2.nds" --heartgold "HeartGold.nds" --out "Platinum Reforged.nds"
-```
-
-- `--white2` works the same way as `--black2`, and `--soulsilver` the same way as `--heartgold`.
-- `--heartgold` is optional. Without it, the game has no following Pokémon.
-- `--out` is optional. Without it, the new ROM goes next to your Platinum ROM.
-- `platinum-reforged-anvil --identify "some rom.nds"` tells you what a ROM is and whether Anvil accepts it.
+1. Get the patch from [Platinum Reforged's Hackdex page](https://www.hackdex.app/hack/pokemon-platinum-reforged).
+2. Apply it to your own clean dump of **Pokémon Platinum (USA)**. The Hackdex page says which dump it takes.
+3. Play the patched ROM on an emulator or a flashcart.
 
 ## Troubleshooting
 
-**"... doesn't match a clean copy of the game"**<br>
-That ROM has been changed (patched, or saved over by a tool) or is a bad dump. Dump the cartridge again, or use
-another clean copy.
-
-**Your antivirus removes or blocks Anvil**<br>
-Programs packaged the way Anvil is are sometimes flagged by mistake. If you downloaded it from this repository's
-releases, restore it and allow it.
-
-**The window doesn't open (Windows)**<br>
-The app needs the Microsoft Edge WebView2 Runtime, which Windows 10 and 11 usually have already. Install it from
-Microsoft, or use the command-line program, which doesn't need it.
-
-**"Permission denied" when starting it (Linux)**<br>
-Make it runnable with `chmod +x platinum-reforged-anvil`.
-
-**No Pokémon follows me**<br>
-The following Pokémon needs a HeartGold or SoulSilver ROM when you build. Build again with one.
-
-Still stuck, or found a bug in the game? [Open an issue](../../issues). Say which version of Anvil you used, which
-ROMs you gave it (the output of `--identify` helps), and what happened.
+Found a bug, or something went wrong? [Open an issue](../../issues). Say which version you're playing, what you
+were doing, and what happened.
 
 ## FAQ
 
-**Can I download the finished ROM instead?**<br>
-No. Platinum Reforged is only available through Anvil, built from games you own.
-
 **Can I keep playing my Platinum save?**<br>
 Yes. Platinum Reforged works with your original Platinum save, and with saves from 0.1. If future features need
-changes an original save can't hold, you will be able to opt out of these in the anvil tool.
-
-**Why not just a normal patch?**<br>
-I'm moving whole systems over from BW2 and HGSS as they are, so a regular patch would be a huge chunk of the same
-bytes as those games, basically handing them out. So I'm not sure a patch like that would really be any different
-from sharing pieces of those ROMs. I might release a patch for future releases, but I'm still not sure. If you have
-any insights into how best to handle this, please let me know! For now, Anvil builds it from the games you already
-own instead, which is why it asks for more than just Platinum.
+changes an original save can't hold, you'll be able to opt out of them.
 
 **I updated from 0.1 and already beat the first Gym. Do I get the Habitat List?**<br>
 Yes. A save past that point already has it in the Pokédex.
-
-## Source code
-
-Anvil is open source, under the MIT License. [Its source](../../) is on GitHub. Also refer to:
-[LICENSE.md](../../blob/main/LICENSE.md).
 
 ## Credits
 
@@ -272,11 +177,6 @@ Platinum Reforged is built on the work of the Pokémon decompilation community:
 - [pokebw2](https://github.com/fuddlesworth/pokebw2), the Pokémon Black 2 and White 2 decompilation.
 
 The Pokédex's maps of Sinnoh are based on a map from [Bulbapedia](https://bulbapedia.bulbagarden.net/).
-
-Anvil is made with [Python](https://www.python.org/), [pywebview](https://pywebview.flowrl.com/),
-[Pillow](https://python-pillow.org/) and [PyInstaller](https://pyinstaller.org/), and runs in the browser with
-[Pyodide](https://pyodide.org/). Their licences are in *NOTICES.txt*, which comes with each download, and on the
-site's [notices](https://smoldice.github.io/platinum-reforged-anvil/notices/) page.
 
 ## Disclaimer
 
