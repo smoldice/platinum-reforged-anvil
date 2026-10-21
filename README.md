@@ -29,7 +29,7 @@ Anvil takes your own Platinum and Black 2 or White 2 (and, if you want your Pok√
 SoulSilver) and writes a new ROM, *Pokemon Platinum Reforged.nds*. It runs
 [in your browser](https://smoldice.github.io/platinum-reforged-anvil/build/) or as a program for Windows and Linux.
 
-## New in 1.1.0
+## New in 0.2.0
 
 This one ended up way bigger than I planned lol. Thanks to everyone who played the first alpha and sent me bug
 reports!
@@ -141,7 +141,7 @@ you like. You can change any of them at any time.
 | RUNNING | ALWAYS: run without holding B (hold B to walk). Needs the Running Shoes | HOLD |
 | TEXT SPEED | Has a new speed, INSTANT, after FAST. A new game starts at FAST | FAST |
 
-> **Changed since 1.0.** The TRAINERS, BATTLE MENUS, EVOLUTION and EGG HATCHING options are gone: trainers keep
+> **Changed since 0.1.** The TRAINERS, BATTLE MENUS, EVOLUTION and EGG HATCHING options are gone: trainers keep
 > their Platinum sprites (plus the custom ones), the battle menus are always in Platinum's look, and evolution and egg
 > hatching always use BW2's scenes.
 
@@ -244,7 +244,7 @@ ROMs you gave it (the output of `--identify` helps), and what happened.
 No. Platinum Reforged is only available through Anvil, built from games you own.
 
 **Can I keep playing my Platinum save?**<br>
-Yes. Platinum Reforged works with your original Platinum save, and with saves from 1.0. If future features need
+Yes. Platinum Reforged works with your original Platinum save, and with saves from 0.1. If future features need
 changes an original save can't hold, you will be able to opt out of these in the anvil tool.
 
 **Why not just a normal patch?**<br>
@@ -254,7 +254,7 @@ from sharing pieces of those ROMs. I might release a patch for future releases, 
 any insights into how best to handle this, please let me know! For now, Anvil builds it from the games you already
 own instead, which is why it asks for more than just Platinum.
 
-**I updated from 1.0 and already beat the first Gym. Do I get the Habitat List?**<br>
+**I updated from 0.1 and already beat the first Gym. Do I get the Habitat List?**<br>
 Yes. A save past that point already has it in the Pok√©dex.
 
 ## Source code
