@@ -1,3 +1,9 @@
+> [!NOTE]
+> **A heads-up: this was made with AI.** Nearly all of it (the code, the tools, the reverse engineering, the docs)
+> was written by Claude, Anthropic's AI, through Claude Code, with me directing, testing and reviewing every step.
+> I'm a huge Platinum fan and built this for myself.
+> If AI-made projects aren't your thing, that's totally fair: feel free to pass on this one.
+
 > [!IMPORTANT]
 > **Platinum Reforged is on Hackdex: [get it there](https://www.hackdex.app/hack/pokemon-platinum-reforged).**
 > New releases come out on Hackdex as patches. Each one is still posted under [Releases](../../releases) here, with
