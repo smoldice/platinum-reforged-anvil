@@ -1,7 +1,7 @@
 > [!IMPORTANT]
-> **Platinum Reforged is moving to Hackdex.** From now on, new releases will be submitted to Hackdex as patches.
-> Each one will still be posted under [Releases](../../releases) here, with a link to its Hackdex page, but without
-> Anvil's files: Anvil won't build the new versions.
+> **Platinum Reforged is on Hackdex: [get it there](https://www.hackdex.app/hack/pokemon-platinum-reforged).**
+> New releases come out on Hackdex as patches. Each one is still posted under [Releases](../../releases) here, with
+> a link to its Hackdex page, but without Anvil's files: Anvil doesn't build the new versions.
 
 <div align="center">
 
