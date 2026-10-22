@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pokémon Platinum Reforged</title>
+<meta name="description" content="Pokémon Platinum with BW2&#x27;s battle engine.">
+<link rel="icon" href="assets/icon.png">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="./">Platinum Reforged</a>
+  <nav>
+    <a href="https://www.hackdex.app/hack/pokemon-platinum-reforged">Get it on Hackdex</a>
+    <a href="https://github.com/smoldice/platinum-reforged-anvil/releases">Releases</a>
+    <a href="https://github.com/smoldice/platinum-reforged-anvil/issues">Report a problem</a>
+  </nav>
+</header>
+<section class="hero">
+  <img class="wordmark" src="assets/wordmark.png" alt="Platinum Reforged">
+  <p class="tagline"><strong>Pokémon Platinum with BW2's battle engine.</strong><br></p>
+  <div class="cta">
+    <a class="button primary" href="https://www.hackdex.app/hack/pokemon-platinum-reforged">Get it on Hackdex</a>
+    <a class="button" href="https://ko-fi.com/smoldice">Buy me a coffee on Ko-fi</a>
+  </div>
+</section>
+<main class="content">
+<blockquote><p><strong>A heads-up: this was made with AI.</strong> Nearly all of it (the code, the tools, the reverse engineering, the docs) was written by Claude, Anthropic's AI, through Claude Code, with me directing, testing and reviewing every step. I'm a huge Platinum fan and built this for myself. If AI-made projects aren't your thing, that's totally fair: feel free to pass on this one.</p></blockquote>
+<blockquote><p><strong>Platinum Reforged is on Hackdex: <a href="https://www.hackdex.app/hack/pokemon-platinum-reforged">get it there</a>.</strong> New releases come out on Hackdex as patches. Each one is still posted under <a href="https://github.com/smoldice/platinum-reforged-anvil/releases">Releases</a> here, with a link to its Hackdex page, but without Anvil's files: Anvil doesn't build the new versions.</p></blockquote>
+<h2 id="what-it-is">What it is</h2>
+<p>Platinum Reforged is a ROM hack of Pokémon Platinum that brings in Black 2 and White 2's battle engine, and more of Gen V along with it. The goal of this romhack is to create a Platinum experience in Gen V's more modern graphics.</p>
+<h2 id="new-in-020">New in 0.2.0</h2>
+<p>This one ended up way bigger than I planned lol. Thanks to everyone who played the first alpha and sent me bug reports!</p>
+<p><strong>Following Pokémon.</strong> Your lead follows you around, with the whole HGSS system ported over: talk to it, mood emotes, and if it likes you it'll gift you stuff (fashion accessories, Shiny Leaves, etc).</p>
+<blockquote><p><strong>You need your own HeartGold or SoulSilver (USA) ROM for this.</strong> This is optional, otherwise you just get the game without followers.</p></blockquote>
+<p align="center">
+  <img src="assets/examples/following_pokemon.png" alt="Following Pokémon: Lucario walking along on Route 208, a music-note bubble on Route 205, and handing over an Accessory in Floaroma Town" width="792">
+</p>
+<p><strong>BW2's Phenomena.</strong> Rustling grass, dust clouds, shadows and rippling water, with rarer Pokémon and items in them. Pokémon that normally only come to honey trees can now also be found in the rustling grass around the tree, so no more slathering honey and waiting a whole day for that Munchlax! Some special Pokémon have their own spots too: you might find Leafeon near the Moss Rock, Glaceon near the Ice Rock, Rotom around the Old Chateau, Spiritomb on Route 209, and Drifloon at Valley Windworks on any day of the week, not just Fridays. Even some Diamond and Pearl exclusives like Murkrow and Stunky are out there!</p>
+<p align="center">
+  <img src="assets/examples/phenomena.png" alt="Rustling grass, a dust cloud, rippling water and a flying Pokémon's shadow, each beside the player" width="530">
+</p>
+<p><strong>BW2's Pokédex + habitat stamps.</strong> After your first badge you get the Habitat List: every area in Sinnoh and what lives there. See everything in an area for a stamp, catch everything for another, finish it completely for a little fanfare. Go fill that map! There are also four NPCs around Sinnoh who'll reward you for completing their area. Not telling you who or where ;)</p>
+<p align="center">
+  <img src="assets/examples/habitat_stamps.png" alt="The Habitat List on Eterna Forest, both screens, with a stamp landing" width="360">
+</p>
+<p><strong>BW2 Engine Battles</strong> also follow Platinum's rules now. On the first release, all the battle logic and calculations were still running on BW2's battle engine; now it's properly using Platinum's (for the most part). Plus a few more custom sprites!</p>
+<p><strong>New options.</strong> Level caps, modern exp share, fast forward, always run and instant text. All toggleable, see <a href="#in-game-options">In-game options</a> below.</p>
+<p><strong>And some smaller stuff:</strong> BW2's registration screen when you catch something new, a save select that shows your party, names like Bidoof instead of BIDOOF, and its own icon on the DS menu.</p>
+<p>Still an alpha, so expect things to break!</p>
+<h2 id="whats-in-it">What's in it</h2>
+<p align="center">
+  <img src="assets/examples/battle.gif" alt="Dawn walks into Youngster Tristan's sight on Route 202, then the battle in BW2's engine" width="512"><br>
+  <em>A trainer battle on Route 202: BW2's battle engine.</em>
+</p>
+<p><strong>Gen V battles everywhere.</strong> Wild Pokémon, trainers, double and tag battles, legendaries, the catching tutorial, the Safari Zone, Pal Park and the Battle Frontier.</p>
+<p><strong>BW2's battle backgrounds.</strong> Routes use BW2's open-field look and dynamic backgrounds depending on where you are standing: lawn, dirt path, tall grass, mountain, caves, snowfields etc.</p>
+<p><strong>Trainers.</strong></p>
+<ul><li>The Sinnoh Gym Leaders and Cynthia battle with the animated sprites BW2 gave them for the Pokémon World Tournament.</li><li><strong>Custom sprites.</strong> This is my attempt at keeping Platinum's aesthetic while still getting the animated battle sprites. I think it turned out decent if not good. For Ace Trainer, Fisherman, Worker, Lass, Waitress, Black Belt, Hiker, Psychic, Rich Boy, Gentleman and Youngster I recolored and/or retextured BW2's sprites and animations to look like their Platinum counterparts. For Roughneck, Clown, Aroma Lady, Picnicker and Bug Catcher I animated their already existing battle sprites. I'll try to add more as I go. <em>Togglable in the options menu.</em></li><li>Every other trainer keeps their Platinum sprite, in battle and on the overworld.</li></ul>
+<div align="center">
+<p><em>Retextured: BW2's sprites and animations, in Platinum's look.</em></p>
+<table><thead><tr><th></th><th>Platinum</th><th>BW2</th><th>Retextured</th><th>Overworld</th></tr></thead><tbody><tr><td><strong>Lass</strong></td><td><img src="assets/examples/lass_platinum.png" alt="Platinum&#x27;s Lass"></td><td><img src="assets/examples/lass_bw2.gif" alt="BW2&#x27;s Lass"></td><td><img src="assets/examples/lass_retextured.gif" alt="The retextured Lass"></td><td><img src="assets/examples/lass_overworld.gif" alt="The Lass on the overworld"></td></tr><tr><td><strong>Fisherman</strong></td><td><img src="assets/examples/fisherman_platinum.png" alt="Platinum&#x27;s Fisherman"></td><td><img src="assets/examples/fisherman_bw2.gif" alt="BW2&#x27;s Fisherman"></td><td><img src="assets/examples/fisherman_retextured.gif" alt="The retextured Fisherman"></td><td><img src="assets/examples/fisherman_overworld.gif" alt="The Fisherman on the overworld"></td></tr></tbody></table>
+<p><em>Animated: Platinum's own sprites.</em></p>
+<table><thead><tr><th></th><th>Platinum</th><th>Animated</th><th>Overworld</th></tr></thead><tbody><tr><td><strong>Bug Catcher</strong></td><td><img src="assets/examples/bug_catcher_platinum.png" alt="Platinum&#x27;s Bug Catcher"></td><td><img src="assets/examples/bug_catcher_animated.gif" alt="The animated Bug Catcher"></td><td><img src="assets/examples/bug_catcher_overworld.gif" alt="The Bug Catcher on the overworld"></td></tr><tr><td><strong>Aroma Lady</strong></td><td><img src="assets/examples/aroma_lady_platinum.png" alt="Platinum&#x27;s Aroma Lady"></td><td><img src="assets/examples/aroma_lady_animated.gif" alt="The animated Aroma Lady"></td><td><img src="assets/examples/aroma_lady_overworld.gif" alt="The Aroma Lady on the overworld"></td></tr></tbody></table>
+</div>
+<p><strong>More of Gen V.</strong> BW2's transitions into battle, its evolution and egg-hatching scenes, and its Critical Health! Low HP Theme.</p>
+<p><strong>Platinum's battle menus, recreated.</strong> Since the game now uses BW2's battle engine, it came bundled with its battle UI on the bottom screen as well. I retextured it to look as close as possible to Platinum's battle UI, so if you notice some differences, that is why.</p>
+<h2 id="in-game-options">In-game options</h2>
+<p>The OPTIONS menu has these new settings, so you can play with as much or as little of Gen V and modern Pokémon as you like. You can change any of them at any time.</p>
+<table><thead><tr><th>Option</th><th>What it changes</th><th>Starts at</th></tr></thead><tbody><tr><td>CUSTOM SPRITES</td><td>The custom sprites and animations for Gen IV trainers</td><td>ON</td></tr><tr><td>TRANSITIONS</td><td>How battles start from the overworld: Platinum's or BW2's</td><td>GEN V</td></tr><tr><td>LOW HP</td><td>BW2's pinch music, or Platinum's beep, when your Pokémon's HP is low</td><td>GEN V</td></tr><tr><td>EXPERIENCE</td><td>MODERN: the whole team gains Exp. Points (100% to those that fought, 50% to the rest), and catching a Pokémon gives Exp. CLASSIC: as in BW2</td><td>CLASSIC</td></tr><tr><td>LEVEL CAPS</td><td>Your Pokémon stop gaining Exp. at the level of the next Gym Leader's strongest Pokémon, then Cynthia's for the League. No caps once you're Champion</td><td>OFF</td></tr><tr><td>FAST FORWARD</td><td>Twice the speed outside battles: while R is held (HOLD) or always (ON)</td><td>OFF</td></tr><tr><td>RUNNING</td><td>ALWAYS: run without holding B (hold B to walk). Needs the Running Shoes</td><td>HOLD</td></tr><tr><td>TEXT SPEED</td><td>Has a new speed, INSTANT, after FAST. A new game starts at FAST</td><td>FAST</td></tr></tbody></table>
+<blockquote><p><strong>Changed since 0.1.</strong> The TRAINERS, BATTLE MENUS, EVOLUTION and EGG HATCHING options are gone: trainers keep their Platinum sprites (plus the custom ones), the battle menus are always in Platinum's look, and evolution and egg hatching always use BW2's scenes.</p></blockquote>
+<h2 id="planned-features">Planned features</h2>
+<ul><li><strong>A difficulty setting.</strong></li><li><strong>Hidden Grottoes</strong>, with the two starters you didn't pick.</li><li>More custom trainer sprites.</li><li>More to come!</li></ul>
+<h2 id="how-to-play">How to play</h2>
+<ol><li>Get the patch from <a href="https://www.hackdex.app/hack/pokemon-platinum-reforged">Platinum Reforged's Hackdex page</a>.</li><li>Apply it to your own clean dump of <strong>Pokémon Platinum (USA)</strong>. The Hackdex page says which dump it takes.</li><li>Play the patched ROM on an emulator or a flashcart.</li></ol>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>Found a bug, or something went wrong? <a href="https://github.com/smoldice/platinum-reforged-anvil/issues">Open an issue</a>. Say which version you're playing, what you were doing, and what happened.</p>
+<h2 id="faq">FAQ</h2>
+<p><strong>Can I keep playing my Platinum save?</strong><br> Yes. Platinum Reforged works with your original Platinum save, and with saves from 0.1. If future features need changes an original save can't hold, you'll be able to opt out of them.</p>
+<p><strong>I updated from 0.1 and already beat the first Gym. Do I get the Habitat List?</strong><br> Yes. A save past that point already has it in the Pokédex.</p>
+<h2 id="credits">Credits</h2>
+<p>Platinum Reforged is built on the work of the Pokémon decompilation community:</p>
+<ul><li><a href="https://github.com/pret/pokeplatinum">pret/pokeplatinum</a>, the Pokémon Platinum decompilation.</li><li><a href="https://github.com/ctrl-cheeb-del/pokeheartgold">pokeheartgold</a>, the Pokémon HeartGold and SoulSilver decompilation, built on <a href="https://github.com/pret/pokeheartgold">pret/pokeheartgold</a>.</li><li><a href="https://github.com/fuddlesworth/pokebw2">pokebw2</a>, the Pokémon Black 2 and White 2 decompilation.</li></ul>
+<p>The Pokédex's maps of Sinnoh are based on a map from <a href="https://bulbapedia.bulbagarden.net/">Bulbapedia</a>.</p>
+<h2 id="disclaimer">Disclaimer</h2>
+<p>Platinum Reforged is a free, unofficial fan project. It is not affiliated with, endorsed by or sponsored by Nintendo, Game Freak, Creatures Inc. or The Pokémon Company. Pokémon and all related names are trademarks of their respective owners. This repository contains no ROMs or game files; the pictures of the game in this README are only examples. Use only games you own.</p>
+<p>Platinum Reforged was made with the help of <a href="https://claude.ai">Claude</a>, Anthropic's AI model, which wrote much of the code and tools under my direction. The ideas, design choices and playtesting are mine.</p>
+</main>
+<footer>
+  Anvil is <a href="https://github.com/smoldice/platinum-reforged-anvil">open source</a> (MIT License) · <a href="notices/">Notices</a> ·
+  Not affiliated with Nintendo, Game Freak, Creatures Inc. or The Pokémon Company.
+</footer>
+</body>
+</html>

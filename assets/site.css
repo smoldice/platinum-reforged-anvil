@@ -1,0 +1,138 @@
+/* The Platinum Reforged site (make_site.py): Anvil's look, silver, navy and red, for the home page (the players'
+   README) and the notices. */
+:root {
+  --bg-top: #f8f9fb;
+  --bg-bottom: #dfe3e9;
+  --panel: #ffffff;
+  --ink: #16213a;
+  --ink-soft: #55607a;
+  --ink-faint: #8a93a6;
+  --line: #d9dee6;
+  --red: #b00f16;
+  --red-deep: #7c0000;
+  --red-glow: rgba(176, 15, 22, 0.28);
+  --radius: 14px;
+  font-family: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    linear-gradient(115deg, transparent 0 38%, rgba(255, 255, 255, 0.55) 44%, transparent 52%) fixed,
+    linear-gradient(180deg, var(--bg-top), var(--bg-bottom)) fixed;
+  line-height: 1.6;
+}
+a { color: var(--red); }
+a:hover { color: var(--red-deep); }
+
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 12px max(16px, calc(50% - 470px));
+  background: rgba(255, 255, 255, 0.72);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+  font-size: 14.5px;
+}
+.top .brand { color: var(--ink); font-weight: 800; text-decoration: none; letter-spacing: 0.01em; }
+.top nav { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-left: auto; }
+.top nav a { color: var(--ink); text-decoration: none; font-weight: 600; }
+.top nav a:hover { color: var(--red); }
+
+.hero { padding: 56px 16px 24px; text-align: center; }
+.hero .wordmark { width: 560px; max-width: 100%; filter: drop-shadow(0 12px 18px rgba(22, 33, 58, 0.16)); }
+.hero .tagline { margin: 22px auto 0; max-width: 640px; font-size: 18px; color: var(--ink-soft); }
+.hero .tagline strong { color: var(--ink); }
+.cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 30px; }
+.button {
+  display: inline-block;
+  padding: 14px 22px;
+  border-radius: 12px;
+  background: var(--panel);
+  border: 1.5px solid var(--line);
+  color: var(--ink);
+  font-size: 15.5px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.1s, box-shadow 0.15s, filter 0.15s;
+}
+.button:hover { color: var(--ink); box-shadow: 0 4px 14px rgba(22, 33, 58, 0.12); }
+.button.primary {
+  border: 0;
+  background: linear-gradient(180deg, #d3242b, var(--red) 55%, var(--red-deep));
+  color: #fff;
+  box-shadow: 0 10px 24px var(--red-glow), 0 1px 0 rgba(255, 255, 255, 0.35) inset;
+}
+.button.primary:hover { color: #fff; filter: brightness(1.06); }
+.button:active { transform: translateY(1px); }
+.cta-note { margin: 16px auto 0; max-width: 560px; font-size: 14px; color: var(--ink-faint); }
+
+.content {
+  max-width: 940px;
+  margin: 28px auto 40px;
+  padding: 12px 44px 36px;
+  background: var(--panel);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 50px rgba(22, 33, 58, 0.1);
+}
+.content h1, .content h2, .content h3 { line-height: 1.25; scroll-margin-top: 70px; }
+.content h2 { margin: 40px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--line); font-size: 25px; }
+.content h3 { margin: 26px 0 8px; font-size: 19px; }
+.content p, .content li { font-size: 15.5px; }
+.content ul, .content ol { padding-left: 24px; }
+.content li { margin: 4px 0; }
+.content code {
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: #f0f2f6;
+  font-family: Consolas, "Cascadia Mono", ui-monospace, monospace;
+  font-size: 0.9em;
+  overflow-wrap: anywhere;
+}
+.content pre {
+  overflow-x: auto;
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: var(--ink);
+  color: #eef1f7;
+}
+.content pre code { padding: 0; background: none; color: inherit; font-size: 13.5px; }
+.content blockquote {
+  margin: 18px 0;
+  padding: 4px 18px;
+  border-left: 4px solid var(--red);
+  border-radius: 0 10px 10px 0;
+  background: #f6f7fa;
+}
+.content blockquote p { margin: 10px 0; }
+.content table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 14.5px; }
+.content th, .content td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+.content th { color: var(--ink-soft); font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; }
+.content hr { border: 0; border-top: 1px solid var(--line); margin: 30px 0; }
+.content img { max-width: 100%; }
+.content td:has(> img) { text-align: center; }
+.content .notice-text { white-space: pre-wrap; font-size: 13px; color: var(--ink-soft); }
+
+footer { padding: 10px 16px 44px; text-align: center; font-size: 13.5px; color: var(--ink-faint); }
+footer a { color: var(--ink-soft); }
+
+@media (max-width: 640px) {
+  .top { gap: 12px; font-size: 13.5px; }
+  .hero { padding-top: 32px; }
+  .content { margin: 18px 12px 32px; padding: 6px 20px 26px; }
+  .content h2 { font-size: 22px; }
+  /* A table wider than the screen (the sprites') scrolls in its own box, not the page */
+  .content table { display: block; overflow-x: auto; }
+  .content td img { max-width: none; }  /* full size: the table scrolls, the pictures don't shrink */
+}
