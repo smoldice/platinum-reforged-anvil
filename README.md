@@ -136,11 +136,13 @@ you like. You can change any of them at any time.
 | CUSTOM SPRITES | The custom sprites and animations for Gen IV trainers | ON |
 | TRANSITIONS | How battles start from the overworld: Platinum's or BW2's | GEN V |
 | LOW HP | BW2's pinch music, or Platinum's beep, when your Pokémon's HP is low | GEN V |
-| EXPERIENCE | MODERN: the whole team gains Exp. Points (100% to those that fought, 50% to the rest), and catching a Pokémon gives Exp. CLASSIC: as in BW2 | CLASSIC |
+| EXPERIENCE | MODERN: the whole team gains Exp. Points (100% to those that fought, 50% to the rest), and catching a Pokémon gives Exp. CLASSIC: as in Platinum | CLASSIC |
 | LEVEL CAPS | Your Pokémon stop gaining Exp. at the level of the next Gym Leader's strongest Pokémon, then Cynthia's for the League. No caps once you're Champion | OFF |
 | FAST FORWARD | Twice the speed outside battles: while R is held (HOLD) or always (ON) | OFF |
 | RUNNING | ALWAYS: run without holding B (hold B to walk). Needs the Running Shoes | HOLD |
+| WILD POKéMON | In grass and caves: Platinum's random encounters (RANDOM), wild Pokémon in the overworld to run into instead (VISIBLE), or both (BOTH) | RANDOM |
 | TEXT SPEED | Has a new speed, INSTANT, after FAST. A new game starts at FAST | FAST |
+| MESSAGE BOX FRAME | Has a new frame, GEN V, after TYPE 20: BW2's message boxes and speech bubbles. A new game starts at GEN V | GEN V |
 
 > **Changed since 0.1.** The TRAINERS, BATTLE MENUS, EVOLUTION and EGG HATCHING options are gone: trainers keep
 > their Platinum sprites (plus the custom ones), the battle menus are always in Platinum's look, and evolution and egg
