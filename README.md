@@ -16,9 +16,10 @@
 **Pokémon Platinum with BW2's battle engine.**<br>
 
 [![Get it on Hackdex](https://img.shields.io/badge/Get_it_on-Hackdex-B00F16?style=for-the-badge)](https://www.hackdex.app/hack/pokemon-platinum-reforged)
+[![Read the wiki](https://img.shields.io/badge/Read_the-Wiki-3B6FB6?style=for-the-badge)](https://smoldice.github.io/platinum-reforged-anvil/)
 [![Buy me a coffee on Ko-fi](https://img.shields.io/badge/Ko--fi-Buy_me_a_coffee-FF5E5B?style=for-the-badge&logo=kofi&logoColor=white)](https://ko-fi.com/smoldice)
 
-[How to play](#how-to-play) · [Options](#in-game-options) · [Troubleshooting](#troubleshooting) · [Report a problem](../../issues)
+[How to play](#how-to-play) · [Wiki](https://smoldice.github.io/platinum-reforged-anvil/) · [Options](#in-game-options) · [Troubleshooting](#troubleshooting) · [Report a problem](../../issues)
 
 </div>
 
@@ -30,50 +31,36 @@ Platinum Reforged is a ROM hack of Pokémon Platinum that brings in Black 2 and 
 more of Gen V along with it. The goal of this romhack is to create a Platinum experience in Gen V's more modern
 graphics.
 
-## New in 0.2.0
+Everything in it, from the options to where to find each Pokémon, is on the
+**[wiki](https://smoldice.github.io/platinum-reforged-anvil/)**.
 
-This one ended up way bigger than I planned lol. Thanks to everyone who played the first alpha and sent me bug
-reports!
+## New in 0.5.0
 
-**Following Pokémon.** Your lead follows you around, with the whole HGSS system ported over: talk to it, mood
-emotes, and if it likes you it'll gift you stuff (fashion accessories, Shiny Leaves, etc).
+Mostly menus this time: the bag, the party and the summary are BW2's now. Thanks to everyone who reported bugs and
+suggested stuff!
 
-> **You need your own HeartGold or SoulSilver (USA) ROM for this.** This is optional, otherwise you just get the
-> game without followers.
+**BW2's bag.** Poké Balls, Mail and Battle Items go in the Items pocket, and the Free Space pocket holds whatever you
+put there. Lucas and Dawn carry their own bags from Platinum on the bag screen.
 
-<p align="center">
-  <img src="assets/examples/following_pokemon.png" alt="Following Pokémon: Lucario walking along on Route 208, a music-note bubble on Route 205, and handing over an Accessory in Floaroma Town" width="792">
-</p>
+**The Y button, as in BW2.** Register key items, bag pockets, and summary or Pokédex pages. With more than one
+registered, Y opens BW2's shortcut menu, and SELECT reorders it.
 
-**BW2's Phenomena.** Rustling grass, dust clouds, shadows and rippling water, with rarer Pokémon and items in them.
-Pokémon that normally only come to honey trees can now also be found in the rustling grass around the tree, so no
-more slathering honey and waiting a whole day for that Munchlax! Some special Pokémon have their own spots too: you
-might find Leafeon near the Moss Rock, Glaceon near the Ice Rock, Rotom around the Old Chateau, Spiritomb on Route
-209, and Drifloon at Valley Windworks on any day of the week, not just Fridays. Even some Diamond and Pearl
-exclusives like Murkrow and Stunky are out there!
+**BW2's party menu and summary**, with Contest Moves and Ribbons pages adapted to BW2's menus. The Stats page ranks
+each stat's IV from S down to F and marks the stats your Pokémon's nature raises and lowers.
 
-<p align="center">
-  <img src="assets/examples/phenomena.png" alt="Rustling grass, a dust cloud, rippling water and a flying Pokémon's shadow, each beside the player" width="530">
-</p>
+**BATTLE MENUS is back** in the options: BW2's own touch-screen menus, battle bag and party list (GEN V), or the
+Platinum look of the last releases (PLATINUM).
 
-**BW2's Pokédex + habitat stamps.** After your first badge you get the Habitat List: every area in Sinnoh and
-what lives there. See everything in an area for a stamp, catch everything for another, finish it completely for a
-little fanfare. Go fill that map! There are also four NPCs around Sinnoh who'll reward you for completing their
-area. Not telling you who or where ;)
+**The Linking Cord**, sold at a new counter on the 4th floor of Veilstone Department Store, evolves the Pokémon that
+evolve by trading. And Pokémon can forget HM moves now.
 
-<p align="center">
-  <img src="assets/examples/habitat_stamps.png" alt="The Habitat List on Eterna Forest, both screens, with a stamp landing" width="360">
-</p>
+**And some smaller stuff:** a FOLLOWER option to turn your following Pokémon off, surfing on BW2's surf Pokémon with
+its wake behind you, wild Pokémon in the overworld growing into view instead of coming out of shaking grass, more
+animated trainers, and a bunch of bug fixes.
 
-**BW2 Engine Battles** also follow Platinum's rules now. On the first release, all the battle logic and calculations
-were still running on BW2's battle engine; now it's properly using Platinum's (for the most part). Plus a few more
-custom sprites!
-
-**New options.** Level caps, modern exp share, fast forward, always run and instant text. All toggleable, see
-[In-game options](#in-game-options) below.
-
-**And some smaller stuff:** BW2's registration screen when you catch something new, a save select that shows your
-party, names like Bidoof instead of BIDOOF, and its own icon on the DS menu.
+Every release and what it changed is on the wiki's
+[What's new](https://smoldice.github.io/platinum-reforged-anvil/start/whats-new/) page, and under
+[Releases](../../releases).
 
 Still an alpha, so expect things to break!
 
@@ -85,10 +72,12 @@ Still an alpha, so expect things to break!
 </p>
 
 **Gen V battles everywhere.** Wild Pokémon, trainers, double and tag battles, legendaries, the catching tutorial,
-the Safari Zone, Pal Park and the Battle Frontier.
+the Safari Zone, Pal Park and the Battle Frontier. They look, sound and animate like BW2's, but follow Platinum's
+rules (for the most part): moves, abilities, items, catching, Exp. and money work as in Platinum.
 
 **BW2's battle backgrounds.** Routes use BW2's open-field look and dynamic backgrounds
-depending on where you are standing: lawn, dirt path, tall grass, mountain, caves, snowfields etc.
+depending on where you are standing: lawn, dirt path, tall grass, mountain, caves, snowfields etc. Every Gym has a
+look of its own, and so does the Distortion World.
 
 **Trainers.**
 - The Sinnoh Gym Leaders and Cynthia battle with the animated sprites BW2 gave them for the Pokémon World
@@ -119,17 +108,56 @@ depending on where you are standing: lawn, dirt path, tall grass, mountain, cave
 
 </div>
 
-**More of Gen V.** BW2's transitions into battle, its evolution and egg-hatching scenes, and its
-Critical Health! Low HP Theme.
-
 **Platinum's battle menus, recreated.** Since the game now uses BW2's battle engine, it came bundled with its battle
 UI on the bottom screen as well. I retextured it to look as close as possible to Platinum's battle UI, so if you
-notice some differences, that is why. Since 0.5.0 you can also pick BW2's own menus: BATTLE MENUS in the options.
+notice some differences, that is why. Since 0.5.0 BW2's own menus are back too: pick either one with BATTLE MENUS
+in the options.
+
+**Following Pokémon.** Your lead follows you around, with the whole HGSS system ported over: talk to it, mood
+emotes, and if it likes you it'll gift you stuff (fashion accessories, Shiny Leaves, etc). Don't want it? Turn it
+off with FOLLOWER in the options.
+
+<p align="center">
+  <img src="assets/examples/following_pokemon.png" alt="Following Pokémon: Lucario walking along on Route 208, a music-note bubble on Route 205, and handing over an Accessory in Floaroma Town" width="792">
+</p>
+
+**BW2's Phenomena.** Rustling grass, dust clouds, shadows and rippling water, with rarer Pokémon and items in them.
+Pokémon that normally only come to honey trees can now also be found in the rustling grass around the tree, so no
+more slathering honey and waiting a whole day for that Munchlax! Some special Pokémon have their own spots too: you
+might find Leafeon near the Moss Rock, Glaceon near the Ice Rock, Rotom around the Old Chateau, Spiritomb on Route
+209, and Drifloon at Valley Windworks on any day of the week, not just Fridays. Even some Diamond and Pearl
+exclusives like Murkrow and Stunky are out there! The wiki has
+[where to find each Pokémon](https://smoldice.github.io/platinum-reforged-anvil/encounters/pokemon/).
+
+<p align="center">
+  <img src="assets/examples/phenomena.png" alt="Rustling grass, a dust cloud, rippling water and a flying Pokémon's shadow, each beside the player" width="530">
+</p>
+
+**Wild Pokémon in the overworld.** With WILD POKéMON at VISIBLE, wild Pokémon come out of the grass and caves and
+wander around near you, and you battle one by running into it. Shinies sparkle! RANDOM keeps Platinum's random
+encounters, and BOTH has both.
+
+**BW2's Pokédex + habitat stamps.** After your first badge you get the Habitat List: every area in Sinnoh and
+what lives there. See everything in an area for a stamp, catch everything for another, finish it completely for a
+little fanfare. Go fill that map! There are also four NPCs around Sinnoh who'll reward you for completing their
+area. Not telling you who or where ;)
+
+<p align="center">
+  <img src="assets/examples/habitat_stamps.png" alt="The Habitat List on Eterna Forest, both screens, with a stamp landing" width="360">
+</p>
+
+**BW2's menus and speech bubbles.** The bag, the party menu, the summary and the Y button's shortcuts are BW2's, and
+the GEN V message box frame gives you BW2's speech bubbles, pointing at whoever is talking.
+
+**More of Gen V.** BW2's transitions into battle, its evolution and egg-hatching scenes, and its
+Critical Health! Low HP Theme. Plus BW2's registration screen when you catch something new, a save select that shows
+your party, names like Bidoof instead of BIDOOF, and its own icon on the DS menu.
 
 ## In-game options
 
 The OPTIONS menu has these new settings, so you can play with as much or as little of Gen V and modern Pokémon as
-you like. You can change any of them at any time.
+you like. You can change any of them at any time. The wiki has
+[a page for each](https://smoldice.github.io/platinum-reforged-anvil/options/menu/).
 
 | Option | What it changes | Starts at |
 | --- | --- | --- |
@@ -163,6 +191,9 @@ you like. You can change any of them at any time.
 2. Apply it to your own clean dump of **Pokémon Platinum (USA)**. The Hackdex page says which dump it takes.
 3. Play the patched ROM on an emulator or a flashcart.
 
+The wiki's [How to play](https://smoldice.github.io/platinum-reforged-anvil/start/how-to-play/) page has the
+details.
+
 ## Troubleshooting
 
 Found a bug, or something went wrong? [Open an issue](../../issues). Say which version you're playing, what you
@@ -171,11 +202,16 @@ were doing, and what happened.
 ## FAQ
 
 **Can I keep playing my Platinum save?**<br>
-Yes. Platinum Reforged works with your original Platinum save, and with saves from 0.1. If future features need
-changes an original save can't hold, you'll be able to opt out of them.
+Yes. Platinum Reforged works with your original Platinum save, and with saves from earlier versions. If future
+features need changes an original save can't hold, you'll be able to opt out of them.
 
-**I updated from 0.1 and already beat the first Gym. Do I get the Habitat List?**<br>
+**I updated and already beat the first Gym. Do I get the Habitat List?**<br>
 Yes. A save past that point already has it in the Pokédex.
+
+**Do I need HeartGold or SoulSilver for following Pokémon?**<br>
+Not anymore. The Hackdex patches have them built in.
+
+More answers on the wiki's [FAQ](https://smoldice.github.io/platinum-reforged-anvil/start/faq/).
 
 ## Credits
 
