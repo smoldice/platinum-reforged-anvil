@@ -94,10 +94,10 @@ depending on where you are standing: lawn, dirt path, tall grass, mountain, cave
 - The Sinnoh Gym Leaders and Cynthia battle with the animated sprites BW2 gave them for the Pokémon World
   Tournament.
 - **Custom sprites.** This is my attempt at keeping Platinum's aesthetic while still getting the animated battle sprites.
-  I think it turned out decent if not good. For Ace Trainer, Fisherman, Worker, Lass, Waitress, Black Belt, Hiker,
-  Psychic, Rich Boy, Gentleman and Youngster I recolored and/or retextured BW2's sprites and animations to look like their
-  Platinum counterparts. For Roughneck, Clown, Aroma Lady, Picnicker and Bug Catcher I animated their already
-  existing battle sprites. I'll try to add more as I go.
+  I think it turned out decent if not good. For Ace Trainer, Fisherman, Worker, Lass, Waitress, Waiter, Black Belt, Hiker,
+  Psychic, Rich Boy, Gentleman, Youngster, Twins and Swimmer I recolored and/or retextured BW2's sprites and animations to
+  look like their Platinum counterparts. For Roughneck, Clown, Aroma Lady, Picnicker, Bug Catcher, the Galactic Grunts
+  and Commander Mars I animated their already existing battle sprites. I'll try to add more as I go.
   *Togglable in the options menu.*
 - Every other trainer keeps their Platinum sprite, in battle and on the overworld.
 
@@ -186,7 +186,8 @@ Platinum Reforged is built on the work of the Pokémon decompilation community:
   built on [pret/pokeheartgold](https://github.com/pret/pokeheartgold).
 - [pokebw2](https://github.com/fuddlesworth/pokebw2), the Pokémon Black 2 and White 2 decompilation.
 
-The Pokédex's maps of Sinnoh are based on a map from [Bulbapedia](https://bulbapedia.bulbagarden.net/).
+The Pokédex's maps of Sinnoh are based on a map from [Bulbapedia](https://bulbapedia.bulbagarden.net/). The Linking
+Cord's item sprite is from Pokémon Rouge.
 
 ## Disclaimer
 
