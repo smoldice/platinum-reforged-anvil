@@ -34,6 +34,12 @@ graphics.
 Everything in it, from the options to where to find each Pokémon, is on the
 **[wiki](https://smoldice.github.io/platinum-reforged-anvil/)**.
 
+## New in 0.5.1
+
+A patch: Pokémon that know Curse no longer crash the game in the summary, Pokémon's shadows sit as in HeartGold,
+wild Pokémon in the overworld shrink away when they leave, and a few more fixes
+([all of it on the wiki](https://smoldice.github.io/platinum-reforged-anvil/start/whats-new/)).
+
 ## New in 0.5.0
 
 Mostly menus this time: the bag, the party and the summary are BW2's now. Thanks to everyone who reported bugs and
